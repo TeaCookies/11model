@@ -38,6 +38,11 @@
 		<td></td>
 	</tr>
 	<tr>
+		<td>구매 수량</td>
+		<td>${purchase.tranQuantity}</td>
+		<td></td>
+	</tr>
+	<tr>
 		<td>구매자이름</td>
 		<td>${purchase.receiverName}</td>
 		<td></td>

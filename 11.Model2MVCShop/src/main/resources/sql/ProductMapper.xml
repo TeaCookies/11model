@@ -56,7 +56,8 @@
 			prod_detail		= #{prodDetail},
 			manufacture_day = TO_DATE(#{manuDate},'YYYY-MM-DD'),
 			price	 		= #{price} ,
-			image_file 		= #{fileName}
+			image_file 		= #{fileName},
+			prodquantity 		= #{prodQuantity}
 	   	</set>
 	   	WHERE prod_no = #{prodNo}
 	 </update>

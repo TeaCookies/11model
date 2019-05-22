@@ -166,11 +166,7 @@ public class PurchaseController {
 //		Product product = productService.getProduct(prodNo);
 		Product product = productService.getProduct2(tranNo);
 		purchase = purchaseService.getPurchase(tranNo);
-		System.out.println("     확인 1    :   "+product);
-		System.out.println("     확인 2    :   "+purchase);
-		System.out.println("     확인 3    :   "+tranCode);
 		
-	
 		if (tranCode.trim().equals("1")) {
 			product.setProTranCode("2");
 		} else if (tranCode.trim().equals("2")) {
@@ -180,9 +176,6 @@ public class PurchaseController {
 		}		
 		
 		purchase.setTranCode(product.getProTranCode());
-		System.out.println("■■■■■■■ 11111 :  " +product.getProTranCode());
-		System.out.println("■■■■■■■ 2222 :  " +purchase.getTranCode());
-		
 		//Business Logic
 		purchaseService.updateTranCode(purchase);
 
@@ -193,6 +186,31 @@ public class PurchaseController {
 		}else {	
 			return "forward:/purchase/listPurchase";
 		}
+	}
+	
+	
+	
+	
+	@RequestMapping( value="cancelPurchase", method=RequestMethod.GET)
+	public String cancelPurchase( @ModelAttribute("purchase") Purchase purchase , 
+																@RequestParam("tranNo") int tranNo ,
+																Model model) throws Exception{
+		
+		System.out.println("/purchase/cancelPurchase : GET");
+	
+		Product product = productService.getProduct2(tranNo);
+		purchase = purchaseService.getPurchase(tranNo);
+		purchase.setTranCode("4");
+		purchaseService.updateTranCode(purchase);
+		
+		product.setProdQuantity(product.getProdQuantity()+purchase.getTranQuantity());
+		productService.updateProdQuantity(product);
+		
+		
+		//Business Logic
+		model.addAttribute("purchase", purchase);
+
+		return "forward:/purchase/listPurchase";
 	}
 	
 	

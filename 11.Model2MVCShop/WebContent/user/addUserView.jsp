@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="/resources/events.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
@@ -142,14 +143,38 @@
 		 
 		//==>"ID중복확인" Event 처리 및 연결
 		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $("button.btn.btn-info").on("click" , function() {
-				popWin 
-				= window.open("/user/checkDuplication.jsp",
-											"popWin", 
-											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-			});
+			 $( "#userId" ).keyup(function( ) {
+					/////////////////////////////////////////////////////////////////////////////////////////// 
+					var userId = $(this).val().trim();
+					$.ajax( 
+							{
+								url : "/user/json/checkDuplication/"+userId ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+														"Accept" : "application/json",
+														"Content-Type" : "application/json"											
+																																									},
+								success : function(JSONData , status) {
+											//	alert(JSONData.result);
+												if(  JSONData.result  ){			
+														$( '#idTest').text(   '사용할 수 있는 아이디입니다.'   );
+												}else{
+														$( '#idTest').text( "이미 존재하는 아이디입니다. " );
+												}
+																																									}
+							});  
+			 });	//아이디 키업
+					 
+			 
+			 $( "input[name=password2]" ).keyup(function( ) {
+				 if( 		$("input[name=password]").val() 	!= 	$("input[name=password2]").val() 	){
+							 $( '#pwdTest').text(   '비밀번호가 일치하지 않습니다.'   );
+				 }else {
+							 $( '#pwdTest').text(   ' '   );
+				 }
+			
+			 }); //비번 키업 
 		});	
 
 	</script>		
@@ -177,13 +202,8 @@
 		  <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요"  readonly>
-		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">입력전 중복확인 부터..</strong>
-		      </span>
-		    </div>
-		    <div class="col-sm-3">
-		      <button type="button" class="btn btn-info">중복확인</button>
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디"  >
+		       <span id="idTest" > </span>
 		    </div>
 		  </div>
 		  
@@ -198,13 +218,14 @@
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password2" name="password2" placeholder="비밀번호 확인">
+		     <span id="pwdTest" > </span>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="userName" name="userName" placeholder="회원이름">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="회원이름">
 		    </div>
 		  </div>
 		  

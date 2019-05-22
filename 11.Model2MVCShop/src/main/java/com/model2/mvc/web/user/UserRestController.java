@@ -165,7 +165,7 @@ public class UserRestController {
 	}
 	
 	//»Æ¿Œ
-	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.POST )
+	@RequestMapping( value="json/checkDuplication/{userId}", method=RequestMethod.GET )
 	public Map checkDuplication(@PathVariable String userId) throws Exception{
 		
 		System.out.println("/user/checkDuplication : POST");
@@ -173,8 +173,6 @@ public class UserRestController {
 		boolean result=userService.checkDuplication(userId);
 		
 		Map map = new HashMap();
-		map.put("message","ok");
-		map.put("userId",userId);
 		map.put("result",result);
 		
 		return map;

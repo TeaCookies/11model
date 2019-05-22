@@ -1,22 +1,34 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<html>
+<!DOCTYPE html>
+
+<html lang="ko">
+	
 <head>
-
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
-
-<title>Insert title here</title>
-
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
-
-<script type="text/javascript">
+	<meta charset="EUC-KR">
+	
+	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="/resources/events.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
+	<!--  ///////////////////////// CSS ////////////////////////// -->
+	<style>
+       body > div.container{
+        	border: 3px solid #D6CDB7;
+            margin-top: 10px;
+        }
+    </style>
+    
+     <!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
 
 	function fncAddPurchase(){
 		//Form 유효성 검증
@@ -75,223 +87,137 @@
 
 <body>
 
-<form name="addPurchase" >
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<div class="navbar  navbar-default">
+        <div class="container">
+        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
+   		</div>
+   	</div>
+   	<!-- ToolBar End /////////////////////////////////////-->
 
-<input type="hidden" name="prodNo" value="${purchase.purchaseProd.prodNo }" />
-<!--  <input type="hidden" name="tranCode" value="1" />-->
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37">
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left: 10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">상품상세조회</td>
-					<td width="20%" align="right">&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37"/>
-		</td>
-	</tr>
-</table>
-
-
-
-<table width="600" border="0" cellspacing="0" cellpadding="0"	align="center" style="margin-top: 13px;">
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="300" class="ct_write">
-			상품번호 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01" width="299">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="105">${purchase.purchaseProd.prodNo }</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			상품명 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.purchaseProd.prodName }</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			상품상세정보 <img	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.purchaseProd.prodDetail }</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">제조일자</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.purchaseProd.manuDate}</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">가격</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.purchaseProd.price }</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">등록일자</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.purchaseProd.regDate }</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">
-			구매자아이디 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${purchase.buyer.userId }</td>
-		<input type="hidden" name="buyerId" value="admin" />
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">구매방법</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<select 	name="paymentOption"		class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20">
-				<option value="1" selected="selected">현금구매</option>
-				<option value="2">신용구매</option>
-			</select>
-		</td>
-	</tr>
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container">
 	
-		<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">수량</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input		type="text" name="tranQuantity" 	class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" />
-		</td>
-	</tr>
+		<h1 class="bg-primary text-center">상품상세조회</h1>
+		
+		<!-- form Start /////////////////////////////////////-->
+		<form class="form-horizontal">
+		
+		  <div class="form-group">
+		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="상품번호"  >
+		       <span id="idTest" > </span>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
+		    <div class="col-sm-4">
+		      <input type="password" class="form-control" id="password" name="password" placeholder="상품명">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
+		    <div class="col-sm-4">
+		      <input type="password" class="form-control" id="password2" name="password2" placeholder="상품상세정보">
+		     <span id="pwdTest" > </span>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="userName" name="userName" placeholder="제조일자">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="가격">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">등록일자</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="addr" name="addr" placeholder="등록일자">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">구매자 아이디</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="buyerId" name="buyerId" placeholder="구매자 아이디">
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
+		     <div class="col-sm-2">
+		      <select class="form-control" name="paymentOption" id="paymentOption">
+				  	<option value="010" >현금구매</option>
+					<option value="011" >신용구매</option>
+				</select>
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">구매자이름</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="receiverName" name="receiverName" placeholder="구매자이름">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">구매자연락처</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" placeholder="구매자연락처">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">구매자주소</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="divyAddr" name="divyAddr" placeholder="구매자주소">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="divyRequest" class="col-sm-offset-1 col-sm-3 control-label">구매요청사항</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="divyRequest" name="divyRequest" placeholder="구매요청사항">
+		    </div>
+		  </div>
+		  
+		   <div class="form-group">
+		    <label for="divyDate" class="col-sm-offset-1 col-sm-3 control-label">배송희망일자</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="divyDate" name="divyDate" placeholder="배송희망일자" readonly>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <div class="col-sm-offset-4  col-sm-4 text-center">
+		      <button type="button" class="btn btn-primary"  >구 &nbsp;매</button>
+			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		    </div>
+		  </div>
+		</form>
+		<!-- form Start /////////////////////////////////////-->
+		
+ 	</div>
+	<!--  화면구성 div end /////////////////////////////////////-->
 	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">구매자이름</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input type="text" name="receiverName" 	class="ct_input_g" 
-						style="width: 100px; height: 19px" maxLength="20" value="${purchase.buyer.userName }" />
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">구매자연락처</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="receiverPhone" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" value="${purchase.buyer.phone }" />
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">구매자주소</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="divyAddr" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" 	value="${purchase.buyer.addr }" />
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">구매요청사항</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input		type="text" name="divyRequest" 	class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" />
-		</td>
-	</tr>
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	<tr>
-		<td width="104" class="ct_write">배송희망일자</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td width="200" class="ct_write01">
-			<input id="cal"	type="text" readonly="readonly" name="divyDate" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
-	<tr>
-		<td width="53%"></td>
-		<td align="center">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						구매
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-					<td width="10"></td>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						취소
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-</form>
-
 </body>
+
 </html>

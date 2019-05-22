@@ -70,6 +70,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 		// TODO Auto-generated method stub
 		purchaseDao.updateTranCode(purchase);
 	}
+	
+
 }
 	
 

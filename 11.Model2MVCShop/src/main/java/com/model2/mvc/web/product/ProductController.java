@@ -197,7 +197,8 @@ public class ProductController {
 			System.out.println(resultPage);
 			
 		}
-		
+		System.out.println("확인                                 :  "+map);
+		System.out.println("확인     222                            :  "+map.get("list"));
 		
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));

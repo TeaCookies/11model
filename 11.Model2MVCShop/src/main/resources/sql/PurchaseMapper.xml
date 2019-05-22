@@ -92,7 +92,8 @@
 	   	</set>
 	   	WHERE tran_no = #{tranNo}
 	 </update>
-		 
+	 
+	 
 		 
 		 
 		 

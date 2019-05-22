@@ -91,6 +91,18 @@
 				
 			$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 		}
+		
+		
+		 $(function() {
+			 $( "#password2" ).keyup(function( ) {
+				 if( 		$("#password").val() 	!= 	$("#password2").val() 	){
+							 $( '#pwdTest').text(   '비밀번호가 일치하지 않습니다.'   );
+				 }else {
+							 $( '#pwdTest').text(   ' '   );
+				 }
+			
+			 }); //비번 키업 
+		});	
 	
 	</script>
 	
@@ -134,6 +146,7 @@
 		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password2" name="password2" placeholder="변경비밀번호 확인">
+		      <span id="pwdTest" > </span>
 		    </div>
 		  </div>
 		  
