@@ -108,7 +108,8 @@ public class PurchaseRestController {
 	@RequestMapping( value="json/getPurchase/{tranNo}", method=RequestMethod.GET)
 	public Purchase getPurchase( @PathVariable int tranNo ) throws Exception {
 		
-		System.out.println("/purchase/getPurchase : GET");
+		System.out.println("***********************/purchase/json/getPurchase : GET");
+		System.out.println("***********************"+tranNo);
 		
 		//Business Logic
 		return purchaseService.getPurchase(tranNo);

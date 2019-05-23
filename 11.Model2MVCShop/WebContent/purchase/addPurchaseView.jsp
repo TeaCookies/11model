@@ -19,6 +19,17 @@
 	<script type="text/javascript" src="/resources/events.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
+	
+<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
@@ -44,28 +55,32 @@
 			return;
 		}
 		if(quantity > ${product.prodQuantity}){
-			alert("${product.prodQuantity+1}개 미만으로 입력해주세요.");
+			alert("${product.prodQuantity}개 이하로 입력해주세요.");
 			return;
 		}
 		$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase").submit();
 	}
 	
 	$(function() {	
-		$( "td.ct_btn01:contains('구매')" ).on("click" , function() {
+		 $( "#tranQuantity" ).keyup(function( ) {
+			var price =  ${purchase.purchaseProd.price } 
+			var quantity = $("#tranQuantity").val() 
+			$( '#tranPrice').val( price  * quantity );
+
+		 }); 
+		 
+		$( "button:contains('구매')" ).on("click" , function() {
 			fncAddPurchase();
 		});
-	}	);
-	
-	
-	$(function() {
-		$( "td.ct_btn01:contains('취소')" ).on("click" , function() {
+
+		$( "button:contains('취소')" ).on("click" , function() {
 			history.go(-1);
 		});
 	});
 	
 	
 	$(function() {		
-		$( "#cal" ).datepicker({
+		$( "#divyDate" ).datepicker({
 			dateFormat: 'yy-mm-dd',
 	        prevText: '이전 달',
 	        nextText: '다음 달',
@@ -86,6 +101,9 @@
 </head>
 
 <body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
@@ -98,64 +116,55 @@
 	<!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container">
 	
-		<h1 class="bg-primary text-center">상품상세조회</h1>
+		<h1 class="bg-primary text-center">주문결제</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
+		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" placeholder="상품번호"  >
-		       <span id="idTest" > </span>
+		      <input type="text" class="form-control" id="prodNo" name="prodNo" placeholder="상품번호" value="${purchase.purchaseProd.prodNo }" readonly>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="상품명">
+		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="상품명" value="${purchase.purchaseProd.prodName }" readonly>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="상품상세정보">
-		     <span id="pwdTest" > </span>
+		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자" value="${purchase.purchaseProd.manuDate}" readonly>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
+		    <label for="tranPrice" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" placeholder="제조일자">
+		      <input type="text" class="form-control" id="tranPrice" name="tranPrice" placeholder="가격" value="" readonly>
 		    </div>
 		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
+		  		  
+		   <div class="form-group">
+		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 수량</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="ssn" name="ssn" placeholder="가격">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">등록일자</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr" placeholder="등록일자">
+		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="buyerId" class="col-sm-offset-1 col-sm-3 control-label">구매자 아이디</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="buyerId" name="buyerId" placeholder="구매자 아이디">
+		      <input type="text" class="form-control" id="buyerId" name="buyerId" placeholder="구매자 아이디" value="${purchase.buyer.userId }" readonly>
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label">구매방법</label>
+		    <label for="paymentOption" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 구매방법</label>
 		     <div class="col-sm-2">
 		      <select class="form-control" name="paymentOption" id="paymentOption">
 				  	<option value="010" >현금구매</option>
@@ -163,32 +172,25 @@
 				</select>
 		    </div>
 		  </div>
-		  
+
 		   <div class="form-group">
-		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
+		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 구매자이름</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량">
+		      <input type="text" class="form-control" id="receiverName" name="receiverName" placeholder="구매자이름" value="${purchase.buyer.userName }" >
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="receiverName" class="col-sm-offset-1 col-sm-3 control-label">구매자이름</label>
+		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 구매자연락처</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverName" name="receiverName" placeholder="구매자이름">
+		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" placeholder="구매자연락처" value="${purchase.buyer.phone }" >
 		    </div>
 		  </div>
 		  
 		   <div class="form-group">
-		    <label for="receiverPhone" class="col-sm-offset-1 col-sm-3 control-label">구매자연락처</label>
+		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 구매자주소</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="receiverPhone" name="receiverPhone" placeholder="구매자연락처">
-		    </div>
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="divyAddr" class="col-sm-offset-1 col-sm-3 control-label">구매자주소</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="divyAddr" name="divyAddr" placeholder="구매자주소">
+		      <input type="text" class="form-control" id="divyAddr" name="divyAddr" placeholder="구매자주소" value="${purchase.buyer.addr }" >
 		    </div>
 		  </div>
 		  
@@ -208,8 +210,8 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >구 &nbsp;매</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		      <button type="button" class="btn btn-primary" >구매</button>
+			  <button type="button" class="btn btn-defalut">취소</button>
 		    </div>
 		  </div>
 		</form>

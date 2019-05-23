@@ -24,6 +24,12 @@
 	<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
 	
+	<!-- Bootstrap Dropdown Hover CSS -->
+   <link href="/css/animate.min.css" rel="stylesheet">
+   <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
+    <!-- Bootstrap Dropdown Hover JS -->
+   <script src="/javascript/bootstrap-dropdownhover.min.js"></script>	
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
@@ -89,13 +95,13 @@
 	
 	$(function() {	
 		
-		$( "td.ct_btn01:contains('등록')" ).on("click" , function() {
+		$( "button:contains('등록')" ).on("click" , function() {
 			 fncAddProduct();
 		});
 
 		
-		$( "td.ct_btn01:contains('취소')" ).on("click" , function() {
-			history.go(-1);
+		$( "button:contains('취소')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
 		});
 	});	
 		
@@ -120,6 +126,9 @@
 </head>
 
 <body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/toolbar.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
@@ -139,7 +148,7 @@
 <form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="상품명"  >
 		       <span id="idTest" > </span>
@@ -147,14 +156,14 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="상품상세정보">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자" readonly>
 		     <span id="pwdTest" > </span>
@@ -162,32 +171,32 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
+		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="price" name="price" placeholder="가격">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
+		    <label for="prodQuantity" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="prodQuantity" name="prodQuantity" placeholder="수량">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
+		    <label for="file" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
 		    <div class="col-sm-4">
-		      <input type="file" class="form-control" id="addr" name="file" placeholder="상품이미지">
+		      <input type="file" class="form-control" id="file" name="file" placeholder="상품이미지">
 		    </div>
 		  </div>
 		  
-		
+
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >등 &nbsp;록</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+		      <button type="button" class="btn btn-primary"  >등록</button>
+		      <button type="button" class="btn btn-default"  >취소</button>
 		    </div>
 		  </div>
 		</form>

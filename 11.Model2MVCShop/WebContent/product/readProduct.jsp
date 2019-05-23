@@ -92,14 +92,14 @@
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>가격</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.price }</div>
+			<div class="col-xs-8 col-md-4">${ product.price }원</div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>수량</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodQuantity }</div>
+			<div class="col-xs-8 col-md-4">${ product.prodQuantity }개</div>
 		</div>
 		
 		<hr/>

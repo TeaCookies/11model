@@ -55,21 +55,25 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		map.put("startRowNum",  search.getStartRowNum()+"" );
 		
 		List<Purchase> list = sqlSession.selectList("PurchaseMapper.getPurchaseList", map); 
-		
+		System.out.println("=================                1            ============================");
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setBuyer((User)sqlSession.selectOne("UserMapper.getUser", list.get(i).getBuyer().getUserId()));
 			list.get(i).setPurchaseProd((Product)sqlSession.selectOne("ProductMapper.getProduct", 
 																		list.get(i).getPurchaseProd().getProdNo()));
 		}
 		//selectOne: 쿼리 결과가 없으면 return null 
-		
-		map.put("totalCount", sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId));
+
+		System.out.println("=================              2           ============================");
+		System.out.println(buyerId);
+		map.put("totalCount", sqlSession.selectOne("PurchaseMapper.getTotalCount", map));
+		System.out.println("=================               3            ============================");
 
 		map.put("list", list);
 
 		return map;
 		
 	}
+	
 
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
@@ -84,7 +88,10 @@ public class PurchaseDaoImpl implements PurchaseDao {
 
 	@Override
 	public int getTotalCount(String	buyerId) throws Exception {
-		return sqlSession.selectOne("PurchaseMapper.getTotalCount", buyerId);
+		Map<String , Object>  map = new HashMap<String, Object>();
+		map.put("buyerId",  buyerId );
+		return sqlSession.selectOne("PurchaseMapper.getTotalCount", map);
 	}
+
 
 }

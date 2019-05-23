@@ -17,7 +17,6 @@ public interface ProductService {
 
 	//상품 리스트
 	public Map<String,Object> getProductList(Search searchVO) throws Exception;
-	public Map<String,Object> getProductList2(Search searchVO) throws Exception;
 
 	//상품 정보 수정
 	public void updateProduct(Product productVO) throws Exception;

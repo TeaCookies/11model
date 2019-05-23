@@ -51,59 +51,62 @@
 	
 	
 	$(function() {
-		$( "td:contains('수취')" ).on("click" , function() {
-			self.location ="/purchase/updateTranCode?tranNo="+$(this).parent().children("td:nth-child(3)").children().val()+"&tranCode="+$(this).parent().children(  "td:nth-child(9)" ).children().val();
-			console.log ( "tranNo :: "+$(this).parent().children("td:nth-child(3)").children().val());
-			console.log ( "tranCode :: "+$(this).parent().children("td:nth-child(9)").children().val());
+		$( "button:contains('수취확인')" ).on("click" , function() {
+			var tranNo = $(this).parent(   ).children( $('input') ).val();
+			var tranCode = $(this).parent(   ).children( ).eq(1).val();
+			self.location ="/purchase/updateTranCode?tranNo="+tranNo+"&tranCode="+tranCode;
+			console.log ( "tranNo :: "+ tranNo  );
+			console.log ( "tranCode :: "+    $(this).parent(   ).children( ).eq(1).val()     );
+		});
+		
+		//취소
+	//	$(".ct_list_pop td:nth-child(15):contains('취소')").on("click" , function() {
+	//		var tranNo = $(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).text().trim();
+	//		self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
+	//	});
+		
+		$( "button:contains('취소')" ).on("click" , function() {
+			var tranNo = $(this).parent(   ).children( ).eq(0).val() ;
+			console.log ( tranNo);
+			self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
 		});
 	});
 		
 	$(function() {
-		//구매날짜 클릭
-		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-		//	self.location ="/purchase/getPurchase?tranNo="+$(this).children().val();
-		//	console.log ( $(this).children().val() );
-		//});
-		
-		//$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-			//Debug..
-			//alert( $(this).children().val());
+		//주문번호 클릭
+		$( "td:nth-child(2)" ).on("click" , function() {
+			var tranNo = $(this).text().trim();
+			//alert(tranNo);
 			
-			//////////////////////////// 추가 , 변경된 부분 ///////////////////////////////////
-			//self.location ="/user/getUser?userId="+$(this).text().trim();
-			////////////////////////////////////////////////////////////////////////////////////////////
-			var tranNo = $(this).children().val();
 			$.ajax( 
-					{
-						url : "/purchase/json/getPurchase/"+tranNo ,
-						method : "GET" ,
-						dataType : "json" ,
-						headers : {
-							"Accept" : "application/json",
-							"Content-Type" : "application/json"
-						},
-						success : function(JSONData , status) {
-							
-							//Debug...
-							//alert(status);
-							//Debug...
-							//alert("JSONData : \n"+JSONData);
-
-							var displayValue = "<h3>"
-														+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
-														+"구매방법 : "+JSONData.paymentOption+"<br/>"
-														+"구매자이름 : "+JSONData.receiverName+"<br/>"
-														+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
-														+"구매자주소 : "+JSONData.divyAddr+"<br/>"
-														+"구매요청사항 : "+JSONData.divyRequest+"<br/>"
-														+"배송희망일 : "+JSONData.divyDate+"<br/>"
-														+"주문일 : "+JSONData.orderDate+"<br/>"
-														+"</h3>";
-														
-							//Debug...									
-							//alert(displayValue);
-							$("h3").remove();
-							$( "#"+tranNo+"" ).html(displayValue);
+				 		{
+							url : "/purchase/json/getPurchase/"+tranNo ,
+							method : "GET" ,
+							dataType : "json" ,
+							headers : {
+												"Accept" : "application/json",
+												"Content-Type" : "application/json"
+												},
+							success : function(JSONData , status) {
+				
+								//alert(status);
+								//alert("JSONData : \n"+JSONData);
+	
+								var displayValue = "<h6>"
+															+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
+															+"구매방법 : "+JSONData.paymentOption+"<br/>"
+															+"구매자이름 : "+JSONData.receiverName+"<br/>"
+															+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
+															+"구매자주소 : "+JSONData.divyAddr+"<br/>"
+															+"구매요청사항 : "+JSONData.divyRequest+"<br/>"
+															+"배송희망일 : "+JSONData.divyDate+"<br/>"
+															+"주문일 : "+JSONData.orderDate+"<br/>"
+															+"</h6>";
+															
+								//Debug...									
+								//alert(displayValue);
+								$("h6").remove();
+								$( "#"+tranNo+"" ).html(displayValue);
 						}
 				});
 		});		
@@ -111,29 +114,15 @@
 	
 		
 		//상품명 클릭
-		$( ".ct_list_pop td:nth-child(5)" ).on("click" , function() {
-			self.location ="/product/getProduct?prodNo="+$(this).children().val()+"&menu=search";
-			console.log ( $(this).children().val() );
+		$( "td:nth-child(3)" ).on("click" , function() {
+			var prodNo = $(	 $( "td:nth-child(3)" )[$( "td:nth-child(3)" ).index(this)] 	).children().val() ;
+			self.location ="/product/getProduct?prodNo="+prodNo+"&menu=search";
+			console.log (   prodNo          );
 		});
-		
-		//취소
-	//	$( "span:contains('취소')" ).on("click" , function() {
-//		$(".ct_list_pop td:nth-child(15)").on("click" , function() {
-//			var tranNo = $(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).text().trim();
-		//	alert( 	tranNo	);
-		//	alert( 	$(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).children().val()	);
-//			self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
-	//	});
-		$(".ct_list_pop td:nth-child(15):contains('취소')").on("click" , function() {
-			var tranNo = $(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).text().trim();
-	//		alert( 	tranNo	);
-		//	alert( 	$(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).children().val()	);
-			self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
-		});
+
 		
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 		$( " .ct_list_pop td:nth-child(5)" ).css("font-weight" , "bold");
-			
 		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 			//console.log ( $(".ct_list_pop:nth-child(1)" ).html() );
 	});	
@@ -187,8 +176,6 @@
             <th align="left">수량</th>
             <th align="left">가격</th>
             <th align="left">주문현황</th>
-            <th align="left">정보수정</th>
-            <th align="left">취소</th>
           </tr>
         </thead>
        
@@ -197,19 +184,38 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="purchase" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="center">${ i }</td>
-			  <td align="left"  title="Click : 회원정보 확인">${purchase.tranNo}
-							<input type="hidden" name="tranNo" value="${purchase.tranNo}"/></td>
-			  <td align="left">${purchase.purchaseProd.prodName }
-							<input type="hidden" name="prodNo" value="${purchase.purchaseProd.prodNo}"/></td>
-			  <td align="left">${purchase.tranQuantity }개</td>
-			  <td align="left"> ${purchase.purchaseProd.price }원
-							<input type="hidden" name="tranCode" value="${purchase.tranCode}"/></td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
-			  	<input type="hidden" value="${user.userId}">
+			<tr class="purchase">
+			  <td align="left" >${ i }</td>
+			  <td align="left" >${purchase.tranNo}
+			  			<span id= "${purchase.tranNo}"></span>
 			  </td>
+			  <td align="left">${purchase.purchaseProd.prodName }
+			  			<input type="hidden" name="prodNo" value="${purchase.purchaseProd.prodNo}"/>
+			  </td>
+			  <td align="left">${purchase.tranQuantity }개</td>
+			  <td align="left"> ${purchase.tranPrice }원</td>
+			  <td align="left">
+			  			<input type="hidden" value="${purchase.tranNo}"/>
+			  			<input type="hidden" value="${purchase.tranCode}"/>
+			  			<c:choose>
+								<c:when test="${purchase.tranCode eq '1' }">
+										구매 완료 <button type="button" class="btn btn-default btn-xs">취소</button>
+								</c:when>
+								<c:when test="${purchase.tranCode eq '2' }">
+										배송 중 <button type="button" class="btn btn-default btn-xs">수취확인</button>
+								</c:when>
+								<c:when test="${purchase.tranCode eq '3' }"> 
+										배송 완료 <button type="button" class="btn btn-default btn-xs">취소</button>
+								</c:when>
+								<c:otherwise>
+										취소 완료
+								</c:otherwise>
+						</c:choose>
+			  </td>
+	<!-- 		  <td align="left">
+				  	<i class="glyphicon glyphicon-ok" id= "${purchase.tranNo}"></i>
+					  	<input type="hidden" value="${purchase.tranNo}"> 
+			  </td>-->	
 			</tr>
           </c:forEach>
         

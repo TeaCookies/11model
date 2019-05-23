@@ -80,7 +80,7 @@ public class PurchaseController {
 	@RequestMapping( value="addPurchase", method=RequestMethod.POST)
 	public String addPurchase( @ModelAttribute("purchase") Purchase purchase, 
 											@RequestParam("prodNo") int prodNo,
-											HttpSession session ) throws Exception {
+											HttpSession session, Model model ) throws Exception {
 
 		System.out.println("/purchase/addPurchase : POST");
 		
@@ -94,6 +94,7 @@ public class PurchaseController {
 		
 		//Business Logic
 		purchaseService.addPurchase(purchase);
+		model.addAttribute("purchase", purchase);
 		
 		return "forward:/purchase/readPurchase.jsp";
 	}
@@ -182,7 +183,7 @@ public class PurchaseController {
 		model.addAttribute("purchase", purchase);
 		
 		if (tranCode.trim().equals("1")) {
-			return "forward:/product/listProduct?menu=manage";
+			return "forward:/purchase/listManage";
 		}else {	
 			return "forward:/purchase/listPurchase";
 		}
@@ -230,6 +231,7 @@ public class PurchaseController {
 		search.setPageSize(pageSize);
 				
 		// Business logic 수행
+		System.out.println("확인용**************" + ((User)session.getAttribute("user")).getUserId());
 		Map<String , Object> map=purchaseService.getPurchaseList(search, ((User)session.getAttribute("user")).getUserId());
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -244,6 +246,34 @@ public class PurchaseController {
 	}
 	
 	
+	
+	@RequestMapping( value="listManage")
+	public String listManage( @ModelAttribute("search") Search search, 
+			Model model ,
+			HttpSession session) throws Exception{
+		
+		System.out.println("/purchase/listPurchase : GET / POST");
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		// Business logic 수행
+		Map<String , Object> map=purchaseService.getPurchaseList(search, null);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
+		
+		// Model 과 View 연결
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+		
+		return "forward:/purchase/listManage.jsp";
+	}
+	
+	
+
 	
 	
 	

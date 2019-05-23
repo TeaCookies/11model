@@ -26,6 +26,7 @@ import com.model2.mvc.common.Search;
 import com.model2.mvc.common.UploadFile;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.purchase.PurchaseService;
 
 
 //==> 판매관리 Controller
@@ -37,6 +38,7 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
+	
 	//setter Method 구현 않음
 	
 	@Resource(name = "uploadPath")
@@ -81,6 +83,7 @@ public class ProductController {
 
 		//Business Logic
 		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
+		System.out.println("파일확인 : "+product.getFileName());
 		productService.addProduct(product);
 		
 		return "forward:/product/readProduct.jsp";
@@ -103,10 +106,10 @@ public class ProductController {
 		model.addAttribute("product", product);	
 		
 		
-		if ( menu.equals("manage") ) {
-			return "forward:/product/updateProduct";
-			
-		} else {
+//		if ( menu.equals("manage") ) {
+//			return "forward:/product/updateProduct";
+//			
+//		} else {
 			if ( cookie != null ) {
 				if ( !( cookie.getValue().contains(Integer.toString(prodNo)) ) ) {
 					cookie.setValue(cookie.getValue()+","+Integer.toString(prodNo));
@@ -118,7 +121,7 @@ public class ProductController {
 			}
 	
 		return "forward:/product/getProduct.jsp";
-		}
+//		}
 	}
 	
 	
@@ -147,10 +150,10 @@ public class ProductController {
 																					MultipartHttpServletRequest mtfRequest) throws Exception{
 
 		System.out.println("/product/updateProduct : POST");
-		
 		//Business Logic
 		product.setFileName(UploadFile.saveFile(mtfRequest.getFile("file"),uploadPath));
 		boolean fileName = product.getFileName().endsWith("_");
+
 
 		if ( fileName ) {
 			product.setFileName((productService.getProduct(product.getProdNo())).getFileName());
@@ -183,20 +186,10 @@ public class ProductController {
 		
 		// Business logic 수행
 		
-		Map<String , Object> map;
-		Page resultPage;
-		
-		if (menu.contains("manage")) {
-			map=productService.getProductList(search);
-			resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			System.out.println(resultPage);
+		Map<String , Object> map=productService.getProductList(search);
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
 			
-		} else {
-			map=productService.getProductList2(search);
-			resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			System.out.println(resultPage);
-			
-		}
 		System.out.println("확인                                 :  "+map);
 		System.out.println("확인     222                            :  "+map.get("list"));
 		
@@ -208,6 +201,6 @@ public class ProductController {
 		return "forward:/product/listProduct.jsp";
 	}
 	
-	
+
 	
 }

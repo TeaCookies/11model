@@ -39,6 +39,12 @@
 	  body {
             padding-top : 50px;
         }
+        
+/*         img { */
+/*       background: url('http://placehold.it/400X400'); */
+/*       background-size: cover; */
+/*       width: 100%; */
+/*     } */
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -56,11 +62,19 @@
 		});
 		
 		
-		
-		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+		$( "a:contains('상세보기')" ).on("click" , function() {	
 			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
-				console.log ( $(this).children().val() );
-				console.log (":::"+ $( ".ct_list_pop td:nth-child(9)").html() );
+			console.log ( $(  this  ).children().val() );
+		});
+		
+		$( "a:contains('바로구매')" ).on("click" , function() {	
+			self.location = "/purchase/addPurchase?prodNo="+$(this).children().val();
+			console.log ( $(this).children().val() );
+		});
+		
+		$( "a:contains('수정')" ).on("click" , function() {	
+			self.location ="/product/updateProduct?prodNo="+$(this).children().val();
+			console.log ( $(this).children().val() );
 		});
 		
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
@@ -68,24 +82,6 @@
 			
 		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 	
-		$( "td:contains('배송하기')" ).on("click" , function() {
-		//	self.location ="/purchase/updateTranCode?prodNo="+$(this).parent().children("td:nth-child(3)").children().val()+"&tranCode="+$(this).parent().children("td:nth-child(9)").children().val();
-			self.location ="/purchase/updateTranCode?tranNo="+$(this).parent().children("td:nth-child(3)").children("input:nth-child(2)").val()+"&tranCode="+$(this).parent().children("td:nth-child(9)").children().val();
-			console.log ( "확인1 :: "+$(this).parent().children("td:nth-child(3)").children().val() );
-			console.log ( "확인2 :: "+$(this).parent().children("td:nth-child(3)").children("input:nth-child(2)").val() );
-			console.log ( "확인3 :: "+$(this).parent().children("td:nth-child(9)").children().val() );
-		
-		});
-		
-		$( "#price:contains('가격')" ).on("click" , function() {
-			self.location ="/product/listProduct?menu=${param.menu}";
-			console.log ( "/product/listProduct?menu=${param.menu}");
-		});
-	//	$( "td:contains('수정')" ).on("click" , function() {
-	//		self.location ="/product/getProduct?prodNo="+$( ".ct_list_pop td:nth-child(3)" ).children().val()+"&menu=${param.menu}";
-	//		console.log ( "/product/listProduct?menu=${param.menu}");
-	//	});
-				
 			
 	 });	
 	
@@ -146,63 +142,42 @@
 		
 		
       <!--  table Start /////////////////////////////////////-->
- <!--     <table class="table table-hover table-striped" >
-      
-        <thead>
-          <tr>
-            <th align="left">No</th>
-            <th align="left" >상품명</th>
-            <c:if test="${ param.menu eq 'manage' }">
-		            <th align="left" >남은 수량</th>
-		            <th align="left" >주문번호</th>
-            </c:if>
-            <th align="left">가격</th>
-            <th align="left">등록일</th>
-            <th align="left">현재상태</th>
-          </tr>
-        </thead>
-       
-		<tbody>-->
-		
+
+		<br/>
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-						<div class="row">
 						  <div class="col-sm-4 col-md-3">
-						    <div class="thumbnail">
-						      <img src="../images/uploadFiles/${product.fileName}" alt="http://placehold.it/400X400">
+						    <div class="thumbnail" style="height: 450px; vertical-align: middle;">
+						      <img class="prodImage" src="../images/uploadFiles/${product.fileName}" height="250px" alt="http://placehold.it/400X400" class="img-rounded">
 						      <div class="caption">
-						        <h3 align="center">${product.prodName} </h3>
+						        <h3 align="center">
+						        		<c:if test="${ product.prodQuantity == 0}">
+						        		<button  class="btn btn-danger btn-xs">품절</button></c:if>
+						    		    ${product.prodName}
+						    	</h3>
+						        <c:if test="${ param.menu eq 'manage' }">
+						        	<p align="center">[남은 수량] ${product.prodQuantity }개</p>  
+						        </c:if> 
 						        <p align="center">${product.price}원</p>
-						        <p align="center"><a href="#" class="btn btn-primary" role="button">바로구매</a> <a href="#" class="btn btn-default" role="button" >상세보기</a></p>
+						        <p align="center">
+						      					<a href="#" class="btn btn-default" role="button" >상세보기
+						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/>
+						        				</a>
+						        				
+						        				<c:if test="${ param.menu ne 'manage'  && product.prodQuantity != 0}">
+						        						<a href="#" class="btn btn-primary" role="button">바로구매
+						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>  
+						        				</c:if>
+						        				<c:if test="${ param.menu eq 'manage' }">
+						        						<a href="#" class="btn btn-primary" role="button">수정
+						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>  
+						        				</c:if>
+						        	</p>
 						      </div>
 						    </div>
 						  </div>
-						</div>
-<!--			<tr>
-			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 상품정보 확인">${product.prodName} 
-					<input type="hidden" value="${product.prodNo}"/>
-					<input type="hidden" value="${ product.prodTranNo }"/>		
-		<%-- 			<% System.out.println("확인            2        :  "+ request.getAttribute("list")); %>  --%>
-			  </td>
-			   <c:if test="${ param.menu eq 'manage' }">
-				  <td align="left">${product.prodQuantity}개</td>
-				  <td align="left"> ${ product.prodTranNo }</td>
-			  </c:if>
-			  <td align="left">${product.price}원</td>
-			  <td align="left">${product.manuDate}</td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${product.prodName} "></i>
-			  	<input type="hidden" value="${product.prodName} ">
-			  </td>
-			</tr>-->
           </c:forEach>
-        
-  <!--      </tbody>
-      
-      </table>-->
-	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->

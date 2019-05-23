@@ -20,15 +20,15 @@ public class Purchase {
 	private String tranCode;
 	private int tranNo;
 	private int tranQuantity;
-	private String status;
+	private int tranPrice;
 	
-	
-	public String getStatus() {
-		return status;
+
+	public int getTranPrice() {
+		return tranPrice;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setTranPrice(int tranPrice) {
+		this.tranPrice = tranPrice;
 	}
 
 	public int getTranQuantity() {

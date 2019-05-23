@@ -17,6 +17,7 @@
 		<result property="addr" 				column="addr" 					jdbcType="VARCHAR" />
 		<result property="email" 			column="email" 				jdbcType="NUMERIC"  />
 		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+<!-- 		<result property="mileage" 		column="mileage" 			jdbcType="INTEGER" /> -->
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -30,6 +31,7 @@
 	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
 		SELECT
+<!-- 		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date 	, mileage 	 -->
 		user_id , user_name , password , role ,  cell_phone ,  addr , email , reg_date 		
 		FROM users 
 		WHERE user_id = #{value}
@@ -46,6 +48,18 @@
 	   	</set>
 	   	WHERE user_id = #{userId}
 	 </update>
+	 
+	 
+<!-- 	 <update	id="updateUserMileage"	parameterType="user" > -->
+<!-- 	   	UPDATE users -->
+<!-- 	   	<set> -->
+<!-- 			mileage				=	#{mileage} -->
+<!-- 	   	</set> -->
+<!-- 	   	WHERE user_id = #{userId} -->
+<!-- 	 </update> -->
+		 
+		 
+		
 		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">

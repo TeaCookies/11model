@@ -19,7 +19,7 @@ public interface PurchaseDao {
 	
 	//SELCT LIST
 	public Map<String , Object> getPurchaseList(Search search, String buyerId) throws Exception ;
-	
+
 	//UPDATE
 	public void updatePurchase(Purchase purchase) throws Exception ;
 	

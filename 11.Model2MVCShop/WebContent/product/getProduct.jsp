@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -34,27 +34,18 @@
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
-	
-	$(function() {
-		
-		$( "td.ct_btn01:contains('확인')" ).on("click" , function() {
-			self.location = "/product/listProduct?menu=${param.menu}";
-		});
-		
-		
-		$( "td.ct_btn01:contains('목록')" ).on("click" , function() {
-			history.go(-1);
-		});
-		
-		$( "td.ct_btn01:contains('구매')" ).on("click" , function() {
-			self.location = "/purchase/addPurchase?prodNo=${product.prodNo}";
-		});
-	});
-	
-	
-
-
-</script>
+			
+			$(function() {
+				$( "button:contains('목록')" ).on("click" , function() {
+					$(self.location).attr("href","/product/listProduct?menu=${ param.menu}");
+				});
+				
+				$( "button:contains('구매')" ).on("click" , function() {
+					self.location = "/purchase/addPurchase?prodNo=${product.prodNo}";
+				});
+			});
+			
+	</script>
 </head>
 
 <body>
@@ -68,60 +59,80 @@
 	
 		<div class="page-header">
 	       <h3 class=" text-info">상품상세조회</h3>
-    </div>
+    	</div>
 	
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품번호</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
-		</div>
+	
+	      <div class="row marketing">
+	        <div class="col-lg-4">
+	          <img src="../images/uploadFiles/${product.fileName}" width="400" height="400"/>
+	        </div>
+	        
+	        <div class="col-lg-1">
+	        </div>
+	
+	        <div class="col-lg-7">
+	          <div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>상품번호</strong></div>
+				<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
+			</div>
+			
+			<hr/>
+			
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3 "><strong>상품명</strong></div>
+				<div class="col-xs-8 col-md-8">${ product.prodName }</div>
+			</div>
+			
+			<hr/>
+			
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3 "><strong>상품상세정보</strong></div>
+				<div class="col-xs-8 col-md-8">${ product.prodDetail }</div>
+			</div>
+			
+			<hr/>
+			
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>제조일자</strong></div>
+				<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
+			</div>
+			
+			<hr/>
+			
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>가격</strong></div>
+				<div class="col-xs-8 col-md-4">${ product.price }원</div>
+			</div>
+			
+			<hr/>
+			
+			
+<!-- 			<div class="row"> -->
+<!-- 		  		<div class="col-xs-4 col-md-3"><strong>적립금</strong></div> -->
+<%-- 				<div class="col-xs-8 col-md-4">${ product.price*(5/1000) }point</div> --%>
+<!-- 			</div> -->
+			
+			<hr/>
+			
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>
+				<div class="col-xs-8 col-md-4">${ product.regDate }</div>
+			</div>
+          
+        </div>
+      </div>
 		
 		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품명</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodName }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품상세정보</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.prodDetail }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>상품이미지</strong></div>
-			<div class="col-xs-8 col-md-4"><img src="../images/uploadFiles/${product.fileName}" /></div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>제조일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>가격</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.price }</div>
-		</div>
-		
-		<hr/>
-		
-		<div class="row">
-	  		<div class="col-xs-4 col-md-2 "><strong>등록일자</strong></div>
-			<div class="col-xs-8 col-md-4">${ product.regDate }</div>
-		</div>
-		
-		<hr/>
-		
+				  			<% System.out.println( "테스트@@@@@@@@@@@"+ request.getParameter("menu")); %>
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">확인</button>
+		  		<c:if test="${ param.menu ne 'manage' && product.prodQuantity != 0}">
+		  				<button type="button" class="btn btn-primary">구매</button>
+		  		</c:if>
+		  		<c:if test="${ product.prodQuantity == 0}">
+   						<a href="#" class="btn btn-danger" role="button">품절</a>
+   				</c:if>
+	  			<button type="button" class="btn btn-defalut">목록</button>
 	  		</div>
 		</div>
 		

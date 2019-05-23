@@ -58,6 +58,7 @@
 		                     <ul class="dropdown-menu">
 		                         <li><a href="#">판매상품등록</a></li>
 		                         <li><a href="#">판매상품관리</a></li>
+		                         <li><a href="#">주문관리</a></li>
 		                         <li class="divider"></li>
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
@@ -135,6 +136,11 @@
 		}); 
 	 	
 	 	
+	 	$( "a:contains('주문관리')" ).on("click" , function() {
+	 		$(self.location).attr("href","/purchase/listManage");
+		}); 
+	 	
+	 	
 	 	$( "a:contains('상 품 검 색')" ).on("click" , function() {
 	 		self.location = "/product/listProduct?menu=search"
 		}); 
@@ -148,6 +154,12 @@
 	 	$( "a:contains('최근 본 상품')" ).on("click" , function() {
 			history();
 		}); 
+	 	
+		function history(){
+			popWin = window.open("/history.jsp",
+														"popWin",
+														"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		}
 	
 		
 	</script>  

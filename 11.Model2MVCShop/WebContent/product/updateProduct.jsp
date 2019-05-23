@@ -77,15 +77,15 @@ function fncAddProduct(){
 
 }
 	$(function() {	
-		$( "td.ct_btn01:contains('수정')" ).on("click" , function() {
+		$( "button:contains('수정')" ).on("click" , function() {
 			 fncAddProduct();
 		});
 	});	
 	
 	
 	$(function() {
-		$( "td.ct_btn01:contains('취소')" ).on("click" , function() {
-			history.go(-1);
+		$( "button:contains('취소')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
 		});
 	});
 	
@@ -128,10 +128,17 @@ function fncAddProduct(){
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
+		    <label for="prodNo" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="prodNo" name="prodNo" value="${product.prodNo}" placeholder="상품번호"  readonly>
+ 	 	   </div>
+		  </div>
+		
+		  <div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="prodName" name="prodName" value="${product.prodName}" placeholder="상품명"  readonly>
- 	    </div>
+ 	  	  </div>
 		  </div>
 		
 		  <div class="form-group">
@@ -149,16 +156,16 @@ function fncAddProduct(){
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="prodQuantity" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
+		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodQuantity" name="prodQuantity" value="${product.price}" placeholder="가격">
+		      <input type="text" class="form-control" id="price" name="price" value="${product.price}" placeholder="가격">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
+		    <label for="prodQuantity" class="col-sm-offset-1 col-sm-3 control-label">수량</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr"  value="${product.prodQuantity}" placeholder="수량">
+		      <input type="text" class="form-control" id="prodQuantity" name="prodQuantity"  value="${product.prodQuantity}" placeholder="수량">
 		    </div>
 		  </div>
 		  
@@ -171,8 +178,8 @@ function fncAddProduct(){
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >수 &nbsp;정</button>
-			  <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a>
+		      <button type="button" class="btn btn-primary"  >수정</button>
+		      <button type="button" class="btn btn-primary"  >취소</button>
 		    </div>
 		  </div>
 		</form>

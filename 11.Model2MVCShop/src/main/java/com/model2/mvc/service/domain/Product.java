@@ -20,14 +20,15 @@ public class Product {
 	private MultipartFile upload;
 	private int prodQuantity;
 	private int prodTranNo;
-	private String prodStatus;
-	
-	public String getProdStatus() {
-		return prodStatus;
+	private int prodTranPrice;
+
+
+	public int getProdTranPrice() {
+		return prodTranPrice;
 	}
 
-	public void setProdStatus(String prodStatus) {
-		this.prodStatus = prodStatus;
+	public void setProdTranPrice(int prodTranPrice) {
+		this.prodTranPrice = prodTranPrice;
 	}
 
 	public int getProdTranNo() {
