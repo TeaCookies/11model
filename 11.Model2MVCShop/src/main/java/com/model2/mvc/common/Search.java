@@ -8,6 +8,8 @@ public class Search {
 	private int currentPage;
 	private String searchCondition;
 	private String searchKeyword;
+	private String soldOut;
+
 	private int pageSize;
 	//==> 리스트화면 currentPage에 해당하는 회원정보를 ROWNUM 사용 SELECT 위해 추가된 Field 
 	//==> UserMapper.xml 의 
@@ -21,6 +23,16 @@ public class Search {
 	}
 	
 	///Method
+	
+	public String getSoldOut() {
+		return soldOut;
+	}
+
+	public void setSoldOut(String soldOut) {
+		this.soldOut = soldOut;
+	}
+
+	
 	public int getPageSize() {
 		return pageSize;
 	}

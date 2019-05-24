@@ -185,6 +185,8 @@
 		  <c:forEach var="purchase" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr class="purchase">
+
+						
 			  <td align="left" >${ i }</td>
 			  <td align="left" >${purchase.tranNo}
 			  			<span id= "${purchase.tranNo}"></span>

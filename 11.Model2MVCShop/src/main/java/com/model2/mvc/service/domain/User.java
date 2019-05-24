@@ -20,9 +20,18 @@ public class User {
 	private String phone1;
 	private String phone2;
 	private String phone3;
+	private int mileage;
 
 	
 	
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
+
 	///Constructor
 	public User(){
 	}
@@ -102,7 +111,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "UserVO : [userId] "+userId+" [userName] "+userName+" [password] "+password+" [role] "+ role
-			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate;
+			+" [ssn] "+ssn+" [phone] "+phone+" [email] "+email+" [regDate] "+regDate+" [mileage] "+mileage;
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////

@@ -81,8 +81,26 @@
 													<if test="searchKeyword != null">
 											 		prod_name LIKE '%'||#{searchKeyword}||'%'
 													</if>
+													<if test="soldOut != null ">
+											 		AND prodquantity != 0
+													</if>
 												</where>
-												ORDER BY prod_no DESC) inner_table
+												<if test="searchCondition == null">
+													ORDER BY prod_no DESC
+												</if>
+												<if test="searchCondition == 0 ">
+													ORDER BY price 
+												</if>
+												<if test="searchCondition == 1 ">
+													ORDER BY price DESC
+												</if>
+												<if test="searchCondition == 2 ">
+													ORDER BY prod_no
+												</if>
+												<if test="searchCondition == 3">
+													ORDER BY prod_no DESC
+												</if>
+												) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	</select>
@@ -110,6 +128,9 @@
 								<if test="searchKeyword !=null ">
 						 		prod_name LIKE '%'||#{searchKeyword}||'%'
 								</if> 
+								<if test="soldOut != null ">
+						 		AND prodquantity != 0
+								</if>
 						</where> ) countTable		
 	 </select>
 	 

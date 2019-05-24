@@ -183,6 +183,7 @@ public class ProductController {
 		
 		search.setPageSize(pageSize);
 		System.out.println("■■■■■ 검색어 확인 : "+search.getSearchKeyword());
+		System.out.println("■■■■■ 확인 : "+search);
 		
 		// Business logic 수행
 		

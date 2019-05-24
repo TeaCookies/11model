@@ -42,13 +42,9 @@
 	<script type="text/javascript">
 
 	function fncAddPurchase(){
-		//Form 유효성 검증
-	 	//var name = document.detailForm.prodName.value;
-		//var detail = document.detailForm.prodDetail.value;
-		//var manuDate = document.detailForm.manuDate.value;
-		//var price = document.detailForm.price.value;
-		
+		//Form 유효성 검증		
 		var quantity=$("input[name='tranQuantity']").val();
+		var mileage=$("#mileage").val();
 	
 		if(quantity == null || quantity.length<1){
 			alert("구매 수량을 입력해주세요.");
@@ -58,16 +54,30 @@
 			alert("${product.prodQuantity}개 이하로 입력해주세요.");
 			return;
 		}
+		if(mileage > ${purchase.buyer.mileage }){
+			alert("${product.prodQuantity}원 이하로 입력해주세요.");
+			return;
+		}
+		
 		$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase").submit();
 	}
 	
 	$(function() {	
 		 $( "#tranQuantity" ).keyup(function( ) {
-			var price =  ${purchase.purchaseProd.price } 
-			var quantity = $("#tranQuantity").val() 
+			var price =  ${purchase.purchaseProd.price } ;
+			var quantity = $("#tranQuantity").val() ;
 			$( '#tranPrice').val( price  * quantity );
-
 		 }); 
+		 
+// 		 $( "#mileage" ).keyup(function( ) {
+// 			var mileage =  $( "#mileage" ).val() ;
+// 			var usermileage = ${purchase.buyer.mileage };
+// 			alert("${product.prodQuantity}원 이하로 입력해주세요.");
+// 			if(mileage > usermileage){
+// 				alert("${product.prodQuantity}원 이하로 입력해주세요.");
+// 				return;
+// 			}
+// 		 }); 
 		 
 		$( "button:contains('구매')" ).on("click" , function() {
 			fncAddPurchase();
@@ -153,6 +163,14 @@
 		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 수량</label>
 		    <div class="col-sm-4">
 		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량">
+		    </div>
+		  </div>
+		  		  
+		   <div class="form-group">
+		    <label for="mileage" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 적립금 사용</label>
+		    <div class="col-sm-4">
+		      <input type="number" class="form-control" id=""mileage"" name="mileage" placeholder="적립금 사용">
+		       <span id="mileage" >보유 적립금 : ${purchase.buyer.mileage }원 </span>
 		    </div>
 		  </div>
 		  

@@ -116,6 +116,7 @@ public class UserController {
 		System.out.println("/user/login : POST");
 		//Business Logic
 		User dbUser=userService.getUser(user.getUserId());
+		System.out.println("»Æ¿Œ    °·°·°·°·°·°·°· "+dbUser);
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);

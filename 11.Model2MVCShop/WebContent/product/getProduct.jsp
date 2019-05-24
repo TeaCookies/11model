@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 
@@ -64,7 +65,8 @@
 	
 	      <div class="row marketing">
 	        <div class="col-lg-4">
-	          <img src="../images/uploadFiles/${product.fileName}" width="400" height="400"/>
+	          <img src="../images/uploadFiles/${product.fileName}" width="400" height="400" 
+	    		      onerror="this.src='http://placehold.it/400x400'"/>
 	        </div>
 	        
 	        <div class="col-lg-1">
@@ -107,10 +109,11 @@
 			<hr/>
 			
 			
-<!-- 			<div class="row"> -->
-<!-- 		  		<div class="col-xs-4 col-md-3"><strong>적립금</strong></div> -->
-<%-- 				<div class="col-xs-8 col-md-4">${ product.price*(5/1000) }point</div> --%>
-<!-- 			</div> -->
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>적립금</strong></div>
+				<div class="col-xs-8 col-md-4"><fmt:formatNumber value="${ product.price*(5/100) }" pattern="0"/>원</div>
+			</div>
+			
 			
 			<hr/>
 			

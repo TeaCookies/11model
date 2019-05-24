@@ -73,10 +73,10 @@
 			console.log (    $(this).parent().children().val()    );
 		});
 				
-			
 	 });	
 	 
-	 $(function() {
+	 $(function() {			
+			$( "td:nth-child(4) " ).css("font-weight" , "bold");
 			//주문번호 클릭
 			$( "td:nth-child(2)" ).on("click" , function() {
 				var tranNo = $(this).text().trim();
@@ -114,11 +114,14 @@
 							}
 					});
 			});
+
 			
 			$(  "td:nth-child(3) " ).on("click" , function() {
 
 				var userId = $(this).text().trim();
 				var userAjax =     $(      $(  "td:nth-child(3) " ).children()[   $(  "td:nth-child(3) " ).index(this)   ]    );
+// 				var userAjax =     $(      $(  "td:nth-child(3) " ).children(   "#"+userId+""    )[   $(  "td:nth-child(3) " ).index(this)   ]    );
+
 
 				$.ajax( 
 						{
@@ -140,7 +143,8 @@
 															+"</h6>";
 								$("h6").remove();
 								userAjax.html(displayValue);
-// 							$( "#"+userId+"" ).html(displayValue);
+// 								alert(displayValue);
+//  							$( "#"+userId+"" ).html(displayValue);
 							}
 					});
 					////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,32 +226,30 @@
 		  <c:forEach var="purchase" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-			  <td align="left">${ i }</td>
-			  <td align="left">${ purchase.tranNo }
-			  		<span id="${purchase.tranNo}"></span>
-			  </td>
-			  <td align="left">${ purchase.buyer.userId }
-			  		<span id="${ purchase.buyer.userId }"></span>
-			  </td>
-			  <td align="left"  title="Click : 상품정보 확인">${purchase.purchaseProd.prodName} 
-					<input type="hidden" value="${purchase.purchaseProd.prodNo}"/>
-			  </td>
-			  <td align="left">${purchase.tranQuantity}개</td>
-			  <td align="left">${purchase.tranPrice}원</td>
-			  <td align="left">${purchase.orderDate}</td>
-			  <td align="left">
-			  		 <input type="hidden" id="tranCode" value="${ purchase.tranCode }"/>	
-					 <c:if test="${purchase.tranCode eq '1'}">판매완료
-					 		 <button type="button" class="btn btn-default btn-xs">배송하기
-					 		 			<input type="hidden" value="${purchase.tranNo}"/>
-					 		 </button>
-					 </c:if>
-					 <c:if test="${purchase.tranCode eq '2'}">배송중</c:if>
-					 <c:if test="${purchase.tranCode eq '3'}">고객수취확인</c:if>
-					 <c:if test="${purchase.tranCode eq '4'}">취소완료</c:if>
-					  
-			  
-			  </td>
+					  <td align="left">${ i }</td>
+					  <td align="left">${ purchase.tranNo }
+						  		<span id="${purchase.tranNo}"></span>
+					  </td>
+					  <td align="left">${ purchase.buyer.userId }
+						  		<span id="${purchase.buyer.userId}"></span>
+					  </td>
+					  <td align="left"  title="Click : 상품정보 확인">${purchase.purchaseProd.prodName} 
+								<input type="hidden" value="${purchase.purchaseProd.prodNo}"/>
+					  </td>
+					  <td align="left">${purchase.tranQuantity}개</td>
+					  <td align="left">${purchase.tranPrice}원</td>
+					  <td align="left">${purchase.orderDate}</td>
+					  <td align="left">
+						  		 <input type="hidden" id="tranCode" value="${ purchase.tranCode }"/>	
+								 <c:if test="${purchase.tranCode eq '1'}">판매완료
+								 		 <button type="button" class="btn btn-default btn-xs">배송하기
+								 		 			<input type="hidden" value="${purchase.tranNo}"/>
+								 		 </button>
+								 </c:if>
+								 <c:if test="${purchase.tranCode eq '2'}">배송중</c:if>
+								 <c:if test="${purchase.tranCode eq '3'}">고객수취확인</c:if>
+								 <c:if test="${purchase.tranCode eq '4'}">취소완료</c:if>
+					  </td>
 <!--				  <td align="left">
 			  	<i class="glyphicon glyphicon-ok" id= "${product.prodName} "></i>
 			  	<input type="hidden" value="${product.prodName} ">

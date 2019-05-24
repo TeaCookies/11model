@@ -36,11 +36,15 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body { 
-              padding-top : 50px; 
-       } 
-
-
+	  body {
+            padding-top : 50px;
+        }
+        
+/*         img { */
+/*       background: url('http://placehold.it/400X400'); */
+/*       background-size: cover; */
+/*       width: 100%; */
+/*     } */
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -57,30 +61,6 @@
 			fncGetList(1);
 		});
 		
-		$("span:contains('품절')").on("click" , function() {
-			$(  '#soldOut'  ).val(  '0'  );
-			fncGetList(1);
-		}); 
-		
-		$("span:contains('낮은')").on("click" , function() {
-			$(  '#searchCondition'  ).val(  '0'  );
-			fncGetList(1);
-		}); 
-		
-		$("span:contains('높은')").on("click" , function() {
-			$(  '#searchCondition'  ).val(  '1'  );
-			fncGetList(1);
-		}); 
-		
-		$("span:contains('등록')").on("click" , function() {
-			$(  '#searchCondition'  ).val(  '2'  );
-			fncGetList(1);
-		}); 
-		
-		$("span:contains('신상품')").on("click" , function() {
-			$(  '#searchCondition'  ).val(  '3'  );
-			fncGetList(1);
-		}); 
 		
 		$( "a:contains('상세보기')" ).on("click" , function() {	
 			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
@@ -144,12 +124,12 @@
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
 			    
-<!-- 			      <div class="form-group"> -->
-<!-- 				    <select class="form-control" name="searchCondition" > -->
-<%-- 						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>낮은 가격 순</option> --%>
-<%-- 						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>높은 가격 순</option> --%>
-<!-- 					</select> -->
-<!-- 				  </div> -->
+			      <div class="form-group">
+				    <select class="form-control" name="searchCondition" >
+						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>낮은 가격 순</option>
+						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>높은 가격 순</option>
+					</select>
+				  </div>
 			    
 				  <div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색어</label>
@@ -161,13 +141,7 @@
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/><br/>
-				  <input type="hidden" id="searchCondition" name="searchCondition" value=""/><br/>
-				  <input type="hidden" id="soldOut" name="soldOut" value=""/><br/>
-				  <span> [품절상품제외] </span>
-				  <span> [낮은 가격 순] </span>
-				  <span> [높은 가격 순] </span>
-				  <span> [등록 순] </span>
-				  <span> [신상품 순] </span>
+				  
 				</form>
 	    	</div>
 	    	
@@ -176,7 +150,12 @@
 
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
 		
-
+		<ul class="nav nav-tabs">
+  <li role="presentation"><a href="#">신상품 순</a></li>
+  <li role="presentation"><a href="#">등록순</a></li>
+  <li role="presentation"><a href="#">낮은 가격 순</a></li>
+  <li role="presentation"><a href="#">높은 가격 순</a></li>
+		 		</ul>   
 		
 		
       <!--  table Start /////////////////////////////////////-->
@@ -186,10 +165,8 @@
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 						  <div class="col-sm-4 col-md-3">
-						    <div class="thumbnail" >
-<!-- 						    <div class="thumbnail" style="height: 450px; vertical-align: middle;"> -->
-						        <img  src="../images/uploadFiles/${product.fileName}" height="400px"  onerror="this.src='http://placehold.it/400x400'" >
-						   
+						    <div class="thumbnail" style="height: 450px; vertical-align: middle;">
+						      <img  src="../images/uploadFiles/${product.fileName}" height="250px" alt="http://placehold.it/400X400" >
 						      <div class="caption">
 						        <h3 align="center">
 						        		<c:if test="${ product.prodQuantity == 0}">
