@@ -59,17 +59,18 @@
 			console.log ( "tranCode :: "+    $(this).parent(   ).children( ).eq(1).val()     );
 		});
 		
-		//취소
-	//	$(".ct_list_pop td:nth-child(15):contains('취소')").on("click" , function() {
-	//		var tranNo = $(  	$('.ct_list_pop td:nth-child(3)')[ $('.ct_list_pop td:nth-child(15)').index(this) ]    ).text().trim();
-	//		self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
-	//	});
-		
 		$( "button:contains('취소')" ).on("click" , function() {
 			var tranNo = $(this).parent(   ).children( ).eq(0).val() ;
 			console.log ( tranNo);
 			self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
 		});
+		
+// 		$( "button:contains('상세보기')" ).on("click" , function() {
+// 			var tranNo = $('td:nth-child(1)').children( ).val() ;
+// 			console.log ( tranNo);
+// 			self.location ="/purchase/getPurchase?tranNo="+tranNo;
+// 		});
+		
 	});
 		
 	$(function() {
@@ -91,16 +92,20 @@
 				
 								//alert(status);
 								//alert("JSONData : \n"+JSONData);
+								if ($.trim(JSONData.paymentOption) == '0' ){JSONData.paymentOption="현금결제"}
+								if ($.trim(JSONData.paymentOption) == '1' ){JSONData.paymentOption="카드결제"}
 	
 								var displayValue = "<h6>"
 															+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
 															+"구매방법 : "+JSONData.paymentOption+"<br/>"
+															+"사용 적립금 : "+JSONData.mileage+"원<br/>"
 															+"구매자이름 : "+JSONData.receiverName+"<br/>"
 															+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
 															+"구매자주소 : "+JSONData.divyAddr+"<br/>"
 															+"구매요청사항 : "+JSONData.divyRequest+"<br/>"
 															+"배송희망일 : "+JSONData.divyDate+"<br/>"
-															+"주문일 : "+JSONData.orderDate+"<br/>"
+															+"주문일 : "+JSONData.orderDate+"<br/><br/>"
+// 															+"<button type=\"button\" class=\"btn btn-default btn-xs\">상세보기</button>"
 															+"</h6>";
 															
 								//Debug...									

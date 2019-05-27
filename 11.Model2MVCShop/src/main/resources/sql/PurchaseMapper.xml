@@ -23,6 +23,7 @@
 		<result property="divyDate" 		column="dlvy_date" 			jdbcType="DATE" />
 		<result property="tranQuantity" 		column="tranquantity" 			jdbcType="INTEGER" />
 		<result property="tranPrice" 		column="tranprice" 			jdbcType="INTEGER" />
+		<result property="mileage" 		column="tranmileage" 			jdbcType="INTEGER" />
 	 </resultMap>
 	
 	
@@ -32,7 +33,7 @@
 	 <insert 	id="addPurchase"		parameterType="purchase" >
 	 	INSERT
 		INTO transaction ( tran_no, prod_no, buyer_id, payment_option, receiver_name, receiver_phone, 
-							demailaddr, dlvy_request, tran_status_code, order_data, dlvy_date, tranquantity, tranprice ) 
+							demailaddr, dlvy_request, tran_status_code, order_data, dlvy_date, tranquantity, tranprice, tranmileage ) 
 		VALUES	 (	seq_transaction_tran_no.nextval, 
 					#{purchaseProd.prodNo} , 
 					#{buyer.userId} , 
@@ -45,7 +46,8 @@
 					SYSDATE , 
 					#{divyDate:DATE},
 					#{tranQuantity}, 
-					#{tranPrice} )
+					#{tranPrice}, 
+					#{mileage} )
 	 </insert>
 	 
 	 
@@ -55,7 +57,7 @@
 	 <select 	id="getPurchase"	parameterType="int"		resultMap="purchaseSelectMap">
 		SELECT
 		tran_no, prod_no, buyer_id, payment_option, receiver_name, receiver_phone, 
-		demailaddr, dlvy_request, tran_status_code, order_data, dlvy_Date , tranquantity, tranprice
+		demailaddr, dlvy_request, tran_status_code, order_data, dlvy_Date , tranquantity, tranprice, tranmileage
 		FROM transaction 
 		WHERE tran_no = #{value}
 	 </select>
@@ -64,7 +66,7 @@
 	 <select 	id="getPurchase2"	parameterType="int"		resultMap="purchaseSelectMap">
 		SELECT
 		tran_no, prod_no, buyer_id, payment_option, receiver_name, receiver_phone, 
-		demailaddr, dlvy_request, tran_status_code, order_data, dlvy_date, tranquantity, tranprice
+		demailaddr, dlvy_request, tran_status_code, order_data, dlvy_date, tranquantity, tranprice, tranmileage
 		FROM transaction 
 		WHERE prod_no = #{value}
 	 </select>

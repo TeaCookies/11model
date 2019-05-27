@@ -22,6 +22,7 @@ import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseService;
+import com.model2.mvc.service.user.UserService;
 
 
 //==> 备概包府 Controller
@@ -36,6 +37,9 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
+	@Autowired
+	@Qualifier("userServiceImpl")
+	private UserService usertService;
 	//setter Method 备泅 臼澜
 		
 	public PurchaseController(){
@@ -86,10 +90,23 @@ public class PurchaseController {
 		
 		Product product=productService.getProduct(prodNo);
 		product.setProdQuantity(product.getProdQuantity()-purchase.getTranQuantity());
+		System.out.println("♂♂♂♂♂"+product.getProdQuantity()+", "+purchase.getTranQuantity());
 		productService.updateProdQuantity(product);
-		
 		purchase.setPurchaseProd(product);
-		purchase.setBuyer((User)session.getAttribute("user"));
+		
+
+		int newMileage = product.getPrice()*purchase.getTranQuantity()*5/100;
+		
+		User user=(User)session.getAttribute("user");
+		if( user.getMileage() == 0 ) {
+			user.setMileage(newMileage);
+		}else {
+			user.setMileage(user.getMileage()-purchase.getMileage()+newMileage);
+			
+		}
+		usertService.updateMileage(user);
+		purchase.setBuyer(user);
+//		purchase.setBuyer((User)session.getAttribute("user"));
 		purchase.setTranCode("1");
 		
 		//Business Logic

@@ -81,7 +81,7 @@
 													<if test="searchKeyword != null">
 											 		prod_name LIKE '%'||#{searchKeyword}||'%'
 													</if>
-													<if test="soldOut != null ">
+													<if test="soldOut == 0">
 											 		AND prodquantity != 0
 													</if>
 												</where>
@@ -128,7 +128,7 @@
 								<if test="searchKeyword !=null ">
 						 		prod_name LIKE '%'||#{searchKeyword}||'%'
 								</if> 
-								<if test="soldOut != null ">
+								<if test="soldOut == 0 ">
 						 		AND prodquantity != 0
 								</if>
 						</where> ) countTable		

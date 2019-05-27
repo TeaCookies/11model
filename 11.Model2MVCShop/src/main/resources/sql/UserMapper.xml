@@ -50,16 +50,14 @@
 	 </update>
 	 
 	 
-<!-- 	 <update	id="updateUserMileage"	parameterType="user" > -->
-<!-- 	   	UPDATE users -->
-<!-- 	   	<set> -->
-<!-- 			mileage				=	#{mileage} -->
-<!-- 	   	</set> -->
-<!-- 	   	WHERE user_id = #{userId} -->
-<!-- 	 </update> -->
+	 <update	id="updateMileage"	parameterType="user" >
+	   	UPDATE users
+	   	<set>
+			mileage				=	#{mileage}
+	   	</set>
+	   	WHERE user_id = #{userId}
+	 </update>
 		 
-		 
-		
 		 
 	<!-- SQL : SELECT LIST -->
 	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">

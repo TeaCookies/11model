@@ -151,7 +151,7 @@
 		}); 
 	 	
 	 	
-	 	$( "a:contains('최근 본 상품')" ).on("click" , function() {
+	 	$( "a:contains('최근본상품')" ).on("click" , function() {
 			history();
 		}); 
 	 	

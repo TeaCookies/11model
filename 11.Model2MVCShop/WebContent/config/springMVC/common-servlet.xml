@@ -61,9 +61,11 @@
 	
 	
 	<!--  :: 파일 업로드 경로 설정 -->	
+	<!-- 				value="C:\Users\USER\git\11model\11.Model2MVCShop\WebContent\images\uploadFiles\"/> -->
+	
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg 
-				value="C:\Users\USER\git\11model\11.Model2MVCShop\WebContent\images\uploadFiles\"/>
+				value="C:\Users\zgg01\git\11model\11.Model2MVCShop\WebContent\images\uploadFiles\"/>
 	</bean>
 	
 	

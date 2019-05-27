@@ -21,7 +21,16 @@ public class Purchase {
 	private int tranNo;
 	private int tranQuantity;
 	private int tranPrice;
+	private int mileage;
 	
+
+	public int getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(int mileage) {
+		this.mileage = mileage;
+	}
 
 	public int getTranPrice() {
 		return tranPrice;
@@ -32,6 +41,9 @@ public class Purchase {
 	}
 
 	public int getTranQuantity() {
+//		Product product=new Product();
+//		tranQuantity=product.getTranQuantity();
+//		System.out.println("==================== : "+tranQuantity);
 		return tranQuantity;
 	}
 
@@ -76,7 +88,7 @@ public class Purchase {
 		this.orderDate = orderDate;
 	}
 	public String getPaymentOption() {
-		return paymentOption.trim();
+		return paymentOption;
 	}
 	public void setPaymentOption(String paymentOption) {
 		this.paymentOption = paymentOption;

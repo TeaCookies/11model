@@ -18,6 +18,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="/resources/events.js"></script>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
@@ -36,7 +40,35 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 			
-			$(function() {
+// 			$(function() {
+// 				var quantity = $( '#tranQuantity').val();
+// 				var prodQuantity = ${product.prodQuantity};
+// 				var price =  ${product.price } ;
+				
+// 				$( "#plus" ).on("click" , function() {
+// 					console.log ("플러스 확인" );
+// 					quantity++;
+// 					$( '#tranQuantity').val(  quantity   );
+					
+// 					if(quantity  >prodQuantity){
+// 						alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+// 						$( '#tranQuantity').val(  prodQuantity  );
+// 						return;
+// 					}
+// 			});
+			
+// 			$( "#minus" ).on("click" , function() {
+// 					console.log ("마이너스 확인" );
+// 					quantity--;
+// 					$( '#tranQuantity').val(  quantity   );
+					
+// 					if(quantity  < 1 ){
+// 							alert("1개 이상 구매하셔야 합니다.");
+// 							$( '#tranQuantity').val(  1  );
+// 							return;
+// 					}
+// 			});
+				
 				$( "button:contains('목록')" ).on("click" , function() {
 					$(self.location).attr("href","/product/listProduct?menu=${ param.menu}");
 				});
@@ -108,14 +140,25 @@
 			
 			<hr/>
 			
-			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3"><strong>적립금</strong></div>
 				<div class="col-xs-8 col-md-4"><fmt:formatNumber value="${ product.price*(5/100) }" pattern="0"/>원</div>
 			</div>
 			
-			
 			<hr/>
+			
+<!-- 			<div class="row"> -->
+<!-- 		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div> -->
+<!-- 				<div class="col-xs-2 col-md-2">  -->
+<!-- 						<input readonly type="number" width="50px" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량" value="1" > -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-6 col-md-4">  -->
+<!-- 						<i class="glyphicon glyphicon-plus" id= "plus"></i> -->
+<!-- 						<i class="glyphicon glyphicon-minus" id= "minus"></i> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+		
+<!-- 			<hr/> -->
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>

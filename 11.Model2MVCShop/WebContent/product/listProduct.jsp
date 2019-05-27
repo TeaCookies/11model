@@ -162,7 +162,7 @@
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/><br/>
 				  <input type="hidden" id="searchCondition" name="searchCondition" value=""/><br/>
-				  <input type="hidden" id="soldOut" name="soldOut" value=""/><br/>
+				  <input type="hidden" id="soldOut" name="soldOut" value="1"/><br/>
 				  <span> [품절상품제외] </span>
 				  <span> [낮은 가격 순] </span>
 				  <span> [높은 가격 순] </span>
@@ -221,7 +221,7 @@
 	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
+
  	
  	<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>

@@ -19,9 +19,20 @@ public class Product {
 	private String proTranCode;
 	private MultipartFile upload;
 	private int prodQuantity;
+//	private int tranQuantity;
+
 	private int prodTranNo;
 	private int prodTranPrice;
 
+
+	
+//	public int getTranQuantity() {
+//		return tranQuantity;
+//	}
+//
+//	public void setTranQuantity(int tranQuantity) {
+//		this.tranQuantity = tranQuantity;
+//	}
 
 	public int getProdTranPrice() {
 		return prodTranPrice;

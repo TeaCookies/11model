@@ -99,6 +99,7 @@
 									var displayValue = "<h6>"
 																+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
 																+"구매방법 : "+JSONData.paymentOption+"<br/>"
+																+"사용 적립금 : "+JSONData.mileage+"원<br/>"
 																+"구매자이름 : "+JSONData.receiverName+"<br/>"
 																+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
 																+"구매자주소 : "+JSONData.divyAddr+"<br/>"
