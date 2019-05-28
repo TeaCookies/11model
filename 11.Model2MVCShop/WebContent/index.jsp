@@ -48,6 +48,11 @@
 			$("a[href='#' ]:contains('로 그 인')").on("click" , function() {
 				self.location = "/user/login"
 			});
+			
+			
+			$("a[href='#' ]:contains('Model2')").on("click" , function() {
+				self.location = "index.jsp"
+			});
 		});
 		
 	</script>	
@@ -94,12 +99,12 @@
 			<!--  Menu 구성 Start /////////////////////////////////////-->     	
 			<div class="col-md-3">
 		        
-		       	<!--  회원관리 목록에 제목 -->
+<!-- 		       	 회원관리 목록에 제목 -->
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<i class="glyphicon glyphicon-heart"></i> 회원관리
          			</div>
-         			<!--  회원관리 아이템 -->
+<!--          			 회원관리 아이템 -->
 					<ul class="list-group">
 						 <li class="list-group-item">
 						 	<a href="#">개인정보조회</a> <i class="glyphicon glyphicon-ban-circle"></i>

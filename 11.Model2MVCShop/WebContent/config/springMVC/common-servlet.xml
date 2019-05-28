@@ -65,7 +65,7 @@
 	
 	<bean id="uploadPath" class="java.lang.String">
 		<constructor-arg 
-				value="C:\Users\zgg01\git\11model\11.Model2MVCShop\WebContent\images\uploadFiles\"/>
+				value="C:\Users\USER\git\11model\11.Model2MVCShop\WebContent\images\uploadFiles\"/>
 	</bean>
 	
 	

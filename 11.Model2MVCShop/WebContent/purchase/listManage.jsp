@@ -95,6 +95,8 @@
 					
 									//alert(status);
 									//alert("JSONData : \n"+JSONData);
+									if ($.trim(JSONData.paymentOption) == '0' ){JSONData.paymentOption="현금결제"}
+									if ($.trim(JSONData.paymentOption) == '1' ){JSONData.paymentOption="카드결제"}
 		
 									var displayValue = "<h6>"
 																+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"

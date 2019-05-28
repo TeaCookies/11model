@@ -79,6 +79,7 @@
 					quantity--;
 					$( '#tranQuantity').val(  quantity   );
 					$( '#tranPrice').val( price  * quantity );
+					$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
 					
 					if(quantity  < 1 ){
 							alert("1개 이상 구매하셔야 합니다.");
@@ -162,6 +163,33 @@
 	
 	});
 	
+	$(function() {
+		$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
+		min: 1,   //스피너로 내릴 수 있는 최소 수
+		max: 100,  //스피너로 올릴 수 있는 최대 수
+		step: 1  //한번 클릭시 증가되는 수		
+		});		
+	});
+	
+// 	$( "#tranQuantity" ).change(function () {
+// 		var quantity = $( '#tranQuantity').val();
+// 		var prodQuantity = ${product.prodQuantity};
+// 		var price =  ${purchase.purchaseProd.price } ;
+		
+// 		$( '#tranQuantity').val(  quantity   );
+// 		$( '#tranPrice').val( price  * quantity );
+// 		$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
+		
+// 		if(quantity  >prodQuantity){
+// 			alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+// 			$( '#tranQuantity').val(  prodQuantity  );
+// 			$( '#tranPrice').val(  ${purchase.purchaseProd.price * product.prodQuantity  } );
+// 			return;
+// 		}
+// 	  })
+// 	  .change();
+
+	
 
 </script>
 </head>
@@ -226,7 +254,8 @@
 		   <div class="form-group">
 		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 수량</label>
 		    <div class="col-sm-1">
-		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량">
+<!-- 		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량"> -->
+		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}" readonly placeholder="수량">
 		    </div>
 		    <div class="col-sm-3">
 						<i class="glyphicon glyphicon-plus" id= "plus"></i>

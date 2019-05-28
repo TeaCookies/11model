@@ -18,10 +18,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	
 		<script type="text/javascript" src="/resources/events.js"></script>
 		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css">
+	
 	
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
@@ -40,7 +43,7 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 			
-// 			$(function() {
+			$(function() {
 // 				var quantity = $( '#tranQuantity').val();
 // 				var prodQuantity = ${product.prodQuantity};
 // 				var price =  ${product.price } ;
@@ -74,15 +77,26 @@
 				});
 				
 				$( "button:contains('구매')" ).on("click" , function() {
-					self.location = "/purchase/addPurchase?prodNo=${product.prodNo}";
+					//self.location = "/purchase/addPurchase?prodNo=${product.prodNo}";
+					$("form").attr("method" , "GET").attr("action" , "/purchase/addPurchase?prodNo=${product.prodNo}").submit();
+
+					console.log ("/purchase/addPurchase?prodNo=${product.prodNo}" );
 				});
 			});
+			
+			$(function() {
+				$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
+				min: 1,   //스피너로 내릴 수 있는 최소 수
+				max: 100,  //스피너로 올릴 수 있는 최대 수
+				step: 1  //한번 클릭시 증가되는 수
+				});
+				});
 			
 	</script>
 </head>
 
 <body>
-
+<form>
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
@@ -108,6 +122,7 @@
 	          <div class="row">
 		  		<div class="col-xs-4 col-md-3"><strong>상품번호</strong></div>
 				<div class="col-xs-8 col-md-4">${ product.prodNo }</div>
+				<input type="hidden" id="prodNo" name="prodNo" value="${ product.prodNo }">
 			</div>
 			
 			<hr/>
@@ -147,18 +162,14 @@
 			
 			<hr/>
 			
-<!-- 			<div class="row"> -->
-<!-- 		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div> -->
-<!-- 				<div class="col-xs-2 col-md-2">  -->
-<!-- 						<input readonly type="number" width="50px" class="form-control" id="tranQuantity" name="tranQuantity" placeholder="수량" value="1" > -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-6 col-md-4">  -->
-<!-- 						<i class="glyphicon glyphicon-plus" id= "plus"></i> -->
-<!-- 						<i class="glyphicon glyphicon-minus" id= "minus"></i> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div>
+				<div class="col-xs-2 col-md-2"> 
+						<input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량">
+				</div>
+			</div>
 		
-<!-- 			<hr/> -->
+			<hr/>
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>
@@ -186,7 +197,7 @@
 		
  	</div>
  	<!--  화면구성 div Start /////////////////////////////////////-->
-
+</form>
 </body>
 
 </html>

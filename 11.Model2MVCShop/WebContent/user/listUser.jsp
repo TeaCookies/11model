@@ -96,6 +96,7 @@
 									var displayValue = "<h6>"
 																+"아이디 : "+JSONData.userId+"<br/>"
 																+"이  름 : "+JSONData.userName+"<br/>"
+																+"적립금: "+JSONData.mileage+"원<br/>"
 																+"이메일 : "+JSONData.email+"<br/>"
 																+"ROLE : "+JSONData.role+"<br/>"
 																+"등록일 : "+JSONData.regDate+"<br/>"
