@@ -111,6 +111,10 @@ public class ProductController {
 //			return "forward:/product/updateProduct";
 //			
 //		} else {
+		String name = "";
+		String abc = "1";
+		name = name + abc + ",";
+		
 			if ( cookie != null ) {
 				if ( !( cookie.getValue().contains(Integer.toString(prodNo)) ) ) {
 					cookie.setValue(cookie.getValue()+","+Integer.toString(prodNo));

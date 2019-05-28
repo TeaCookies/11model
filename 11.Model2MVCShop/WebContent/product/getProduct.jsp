@@ -84,13 +84,50 @@
 				});
 			});
 			
-			$(function() {
-				$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
-				min: 1,   //스피너로 내릴 수 있는 최소 수
-				max: 100,  //스피너로 올릴 수 있는 최대 수
-				step: 1  //한번 클릭시 증가되는 수
-				});
-				});
+			
+// 			$(function() {
+// 				$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
+// 				min: 1,   //스피너로 내릴 수 있는 최소 수
+// 				max: 100,  //스피너로 올릴 수 있는 최대 수
+// 				step: 1  //한번 클릭시 증가되는 수
+// 				});
+// 			});
+			
+			
+// 			$(function() {
+// 				var quantity = $( '#tranQuantity').val();
+// 		 		var prodQuantity = ${product.prodQuantity};
+// // 		 		$(quantity).on("change keyup paste", function () {
+// // 		 		console.log (quantity +",     "+prodQuantity);
+		 		
+		 		
+		 		
+// 		 		if( $( '#tranQuantity').val() >prodQuantity ){
+// 		 			alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+// 		 			$( '#tranQuantity').val(  prodQuantity  );
+// 		 		}
+				
+// // 			});
+// 			});
+			
+			
+			
+
+// 		 	$( "#tranQuantity" ).change(function () {
+	 		
+			
+// 	 		$( '#tranQuantity').val(  quantity   );
+// 	 		$( '#tranPrice').val( price  * quantity );
+// 	 		$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
+			
+// 	 		if(quantity  >prodQuantity){
+// 	 			alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+// 	 			$( '#tranQuantity').val(  prodQuantity  );
+// 	 			$( '#tranPrice').val(  ${purchase.purchaseProd.price * product.prodQuantity  } );
+// 	 			return;
+// 	 		}
+// 	 	  })
+// 	 	  .change();
 			
 	</script>
 </head>
@@ -162,14 +199,14 @@
 			
 			<hr/>
 			
-			<div class="row">
-		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div>
-				<div class="col-xs-2 col-md-2"> 
-						<input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량">
-				</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div> -->
+<!-- 				<div class="col-xs-2 col-md-2">  -->
+<!-- 						<input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		
-			<hr/>
+<!-- 			<hr/> -->
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>

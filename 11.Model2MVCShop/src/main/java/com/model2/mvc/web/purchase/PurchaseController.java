@@ -67,16 +67,11 @@ public class PurchaseController {
 												HttpSession session) throws Exception {
 
 		System.out.println("/purchase/addPurchase : GET");
-		System.out.println("¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á"+request.getParameter("tranQuantity"));
-		
-		purchase.setTranQuantity(Integer.parseInt(request.getParameter("tranQuantity")));
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
-//		purchase.setPurchaseProd(productService.getProduct(Integer.parseInt(request.getParameter("prodNo"))));
 		purchase.setBuyer((User)session.getAttribute("user"));
 		
 		model.addAttribute("purchase", purchase);
 		model.addAttribute("product", productService.getProduct(prodNo));
-//		model.addAttribute("product", productService.getProduct(Integer.parseInt(request.getParameter("prodNo"))));
 		
 		return "forward:/purchase/addPurchaseView.jsp";
 	}
