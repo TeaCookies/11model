@@ -105,7 +105,7 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		// Model 과 View 연결
 		model.addAttribute("product", product);	
-		
+		System.out.println("파일이름 확인 : "+product.getFileName());
 		
 //		if ( menu.equals("manage") ) {
 //			return "forward:/product/updateProduct";
@@ -116,8 +116,10 @@ public class ProductController {
 		name = name + abc + ",";
 		
 			if ( cookie != null ) {
-				if ( !( cookie.getValue().contains(Integer.toString(prodNo)) ) ) {
+				if ( !(   cookie.getValue().contains(  Integer.toString(prodNo)   )   ) ) {
+					System.out.println("쿠키확인 @@@@@@@@@@ "+cookie.getValue());
 					cookie.setValue(cookie.getValue()+","+Integer.toString(prodNo));
+					System.out.println("쿠키확인2 @@@@@@@@@@ "+cookie.getValue());
 					cookie.setPath("/");
 					response.addCookie(cookie);
 				}

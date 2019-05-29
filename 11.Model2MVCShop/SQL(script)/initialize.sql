@@ -2,6 +2,7 @@
 DROP TABLE transaction;
 DROP TABLE product;
 DROP TABLE users;
+DROP TABLE mileage;
 
 DROP SEQUENCE seq_product_prod_no;
 DROP SEQUENCE seq_transaction_tran_no;
@@ -22,6 +23,12 @@ CREATE TABLE users (
 	email 			 	VARCHAR2(50),
 	reg_date 	 	DATE,
 	PRIMARY KEY(user_id)
+);
+
+
+CREATE TABLE mileage ( 
+	user_id 		 	VARCHAR2(20)	NOT NULL REFERENCES users(user_id),
+	mileage	 		NUMBER(6,0)
 );
 
 

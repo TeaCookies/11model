@@ -58,60 +58,60 @@
 			var prodQuantity = ${product.prodQuantity};
 			var price =  ${purchase.purchaseProd.price } ;
 			
-			$( "#plus" ).on("click" , function() {
-					console.log ("플러스 확인" );
-					console.log ("${purchase.tranQuantity}" );
-					quantity++;
-					$( '#tranQuantity').val(  quantity   );
-					$( '#tranPrice').val( price  * quantity );
-					$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
+// 			$( "#plus" ).on("click" , function() {
+// 					console.log ("플러스 확인" );
+// 					console.log ("${purchase.tranQuantity}" );
+// 					quantity++;
+// 					$( '#tranQuantity').val(  quantity   );
+// 					$( '#tranPrice').val( price  * quantity );
+// 					$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
 					
-					if(quantity  >prodQuantity){
-						alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
-						$( '#tranQuantity').val(  prodQuantity  );
-						$( '#tranPrice').val(  ${purchase.purchaseProd.price * product.prodQuantity  } );
-						return;
-					}
-			});
+// 					if(quantity  >prodQuantity){
+// 						alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+// 						$( '#tranQuantity').val(  prodQuantity  );
+// 						$( '#tranPrice').val(  ${purchase.purchaseProd.price * product.prodQuantity  } );
+// 						return;
+// 					}
+// 			});
 			
-			$( "#minus" ).on("click" , function() {
-					console.log ("마이너스 확인" );
-					quantity--;
-					$( '#tranQuantity').val(  quantity   );
-					$( '#tranPrice').val( price  * quantity );
-					$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
+// 			$( "#minus" ).on("click" , function() {
+// 					console.log ("마이너스 확인" );
+// 					quantity--;
+// 					$( '#tranQuantity').val(  quantity   );
+// 					$( '#tranPrice').val( price  * quantity );
+// 					$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
 					
-					if(quantity  < 1 ){
-							alert("1개 이상 구매하셔야 합니다.");
-							$( '#tranQuantity').val(  1  );
-							$( '#tranPrice').val(${purchase.purchaseProd.price} );
-							return;
-					}
-			});
+// 					if(quantity  < 1 ){
+// 							alert("1개 이상 구매하셔야 합니다.");
+// 							$( '#tranQuantity').val(  1  );
+// 							$( '#tranPrice').val(${purchase.purchaseProd.price} );
+// 							return;
+// 					}
+// 			});
 			
 
  		 $( "#mileage" ).keyup(function( ) {
-	 			console.log ("키업 확인" );
-				var mileage =  $( "#mileage" ).val() ;
+				var mileage =  $( "#mileage" ).val().trim() ;
 				var usermileage = ${purchase.buyer.mileage };
 				var price = $( '#tranPrice').val();
 				$( '#userMileage').text( usermileage-mileage  );
+				console.log ("마일리지 : "+mileage);
+				console.log ("가격 : "+price);
+				console.log (parseInt(price) +parseInt(mileage));
 				
-	 			if(mileage > price/1){
+				if( parseInt(mileage) > parseInt(usermileage)  ){
+	 				alert("${purchase.buyer.mileage }원 이하로 입력해주세요.");
+	 				$(  "#mileage" ).val(  ${purchase.buyer.mileage }  );
+	 				$( '#userMileage').text( 0 );
+	 				return;
+ 				}
+	 			if( parseInt(price) <  parseInt(mileage) ){
 		 				alert( $( '#tranPrice').val()+"원 이하로 입력해주세요.");
-		 				console.log (mileage);
-		 				console.log (price);
-		 				
 		 				$(  "#mileage" ).val(  price  );
 		 				$( '#userMileage').text( usermileage-price )
 		 				return;
 	 			}
-	 			if(mileage > usermileage){
-		 				alert("${purchase.buyer.mileage }원 이하로 입력해주세요.");
-		 				$(  "#mileage" ).val(  ${purchase.buyer.mileage }  );
-		 				$( '#userMileage').text( 0 );
-		 				return;
-	 			}
+	 			
  		 } ) ; 
  		 
  		$( 'input[type=checkbox]').on('click', function(){
@@ -123,13 +123,7 @@
  			if (    $( 'input[type=checkbox]').prop("checked")   ){
 					console.log ("체크 확인" );
 					console.log (  $( 'input[type=checkbox]').val()  );
-					if(price>=mileage) {
-							$( '#tranPrice').val( price-mileage);
-					}else if(price <mileage) {
-							$( "#mileage" ).val(price);
-							$( '#tranPrice').val( 0);
-							$( '#userMileage').text( usermileage-mileage  );
-					}
+					$( '#tranPrice').val( price-mileage);
 			}else{
 				$( '#tranPrice').val( ${purchase.purchaseProd.price } *  quantity  );
 			}
@@ -203,37 +197,39 @@
 		    </div>
 		  </div>
 		  
-		  <div class="form-group">
-		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자" value="${purchase.purchaseProd.manuDate}" readonly>
-		    </div>
-		  </div>
+<!-- 		  <div class="form-group"> -->
+<!-- 		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label> -->
+<!-- 		    <div class="col-sm-4"> -->
+<%-- 		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자" value="${purchase.purchaseProd.manuDate}" readonly> --%>
+<!-- 		    </div> -->
+<!-- 		  </div> -->
 		  
 		  <div class="form-group">
 		    <label for="tranPrice" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="tranPrice" name="tranPrice" placeholder="가격" value="${purchase.purchaseProd.price}" readonly>
+		      <input type="text" class="form-control" id="tranPrice" name="tranPrice" placeholder="가격" value="${purchase.purchaseProd.price*purchase.tranQuantity}" readonly>
 		    </div>
 		  </div>
+		  		  		  
+		   <div class="form-group">
+		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"> 수량</label>
+		    <div class="col-sm-1">
+		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}" readonly placeholder="수량">
+		    </div>
+<!-- 		    <div class="col-sm-3"> -->
+<!-- 						<i class="glyphicon glyphicon-plus" id= "plus"></i> -->
+<!-- 						<i class="glyphicon glyphicon-minus" id= "minus"></i> -->
+<!-- 				</div> -->
+		  </div>
+
 		  		  
 		  <div class="form-group">
 		    <label for="prodMile" class="col-sm-offset-1 col-sm-3 control-label">적립 예정</label>
 		    <div class="col-sm-4">
-					<span id="prodMile"><fmt:formatNumber  value="${purchase.purchaseProd.price * (5/100) }" pattern="0"/>원</span>
+					<span id="prodMile"><fmt:formatNumber  value="${purchase.purchaseProd.price *purchase.tranQuantity* (5/100) }" pattern="0"/>원</span>
 		    </div>
 		  </div>
-		  		  
-		   <div class="form-group">
-		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 수량</label>
-		    <div class="col-sm-1">
-		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량">
-		    </div>
-		    <div class="col-sm-3">
-						<i class="glyphicon glyphicon-plus" id= "plus"></i>
-						<i class="glyphicon glyphicon-minus" id= "minus"></i>
-				</div>
-		  </div>
+
 		  
 		   <div class="form-group">
 		    <label for="mileage" class="col-sm-offset-1 col-sm-3 control-label"><i class="glyphicon glyphicon-ok" ></i> 적립금 사용</label>

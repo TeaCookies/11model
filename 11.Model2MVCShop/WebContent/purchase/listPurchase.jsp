@@ -59,7 +59,7 @@
 			console.log ( "tranCode :: "+    $(this).parent(   ).children( ).eq(1).val()     );
 		});
 		
-		$( "button:contains('취소')" ).on("click" , function() {
+		$( "button:contains('취소'), button:contains('환불')" ).on("click" , function() {
 			var tranNo = $(this).parent(   ).children( ).eq(0).val() ;
 			console.log ( tranNo);
 			self.location ="/purchase/cancelPurchase?tranNo="+tranNo;
@@ -212,7 +212,7 @@
 										배송 중 <button type="button" class="btn btn-default btn-xs">수취확인</button>
 								</c:when>
 								<c:when test="${purchase.tranCode eq '3' }"> 
-										배송 완료 <button type="button" class="btn btn-default btn-xs">취소</button>
+										배송 완료 <button type="button" class="btn btn-default btn-xs">환불</button>
 								</c:when>
 								<c:otherwise>
 										취소 완료

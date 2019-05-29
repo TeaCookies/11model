@@ -76,6 +76,11 @@
 					$(self.location).attr("href","/product/listProduct?menu=${ param.menu}");
 				});
 				
+				$( "button:contains('수정')" ).on("click" , function() {
+					self.location ="/product/updateProduct?prodNo=${ product.prodNo }";
+				});
+				
+				
 				$( "button:contains('구매')" ).on("click" , function() {
 					//self.location = "/purchase/addPurchase?prodNo=${product.prodNo}";
 					$("form").attr("method" , "GET").attr("action" , "/purchase/addPurchase?prodNo=${product.prodNo}").submit();
@@ -84,50 +89,29 @@
 				});
 			});
 			
-			
-// 			$(function() {
-// 				$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
-// 				min: 1,   //스피너로 내릴 수 있는 최소 수
-// 				max: 100,  //스피너로 올릴 수 있는 최대 수
-// 				step: 1  //한번 클릭시 증가되는 수
-// 				});
-// 			});
-			
-			
-// 			$(function() {
-// 				var quantity = $( '#tranQuantity').val();
-// 		 		var prodQuantity = ${product.prodQuantity};
-// // 		 		$(quantity).on("change keyup paste", function () {
-// // 		 		console.log (quantity +",     "+prodQuantity);
-		 		
-		 		
-		 		
-// 		 		if( $( '#tranQuantity').val() >prodQuantity ){
-// 		 			alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
-// 		 			$( '#tranQuantity').val(  prodQuantity  );
-// 		 		}
-				
-// // 			});
-// 			});
-			
-			
-			
 
-// 		 	$( "#tranQuantity" ).change(function () {
-	 		
-			
-// 	 		$( '#tranQuantity').val(  quantity   );
-// 	 		$( '#tranPrice').val( price  * quantity );
-// 	 		$( '#prodMile').text( (price  * quantity)*(5/100)+"원" );
-			
-// 	 		if(quantity  >prodQuantity){
-// 	 			alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
-// 	 			$( '#tranQuantity').val(  prodQuantity  );
-// 	 			$( '#tranPrice').val(  ${purchase.purchaseProd.price * product.prodQuantity  } );
-// 	 			return;
-// 	 		}
-// 	 	  })
-// 	 	  .change();
+			$(function() {
+				$( "#tranQuantity" ).spinner({ //스피너를 만들어준다.
+// 					min: 1,   //스피너로 내릴 수 있는 최소 수
+// 					max: 100,  //스피너로 올릴 수 있는 최대 수
+// 					step: 1  //한번 클릭시 증가되는 수
+
+					stop: function (event, ui) {
+						var quan =  $( "#tranQuantity" ).val();
+						var prod = ${product.prodQuantity};
+						
+// 				        $('#test').text(   $( "#tranQuantity" ).val()  );
+						console.log( "수량 확인 : "+ quan  );
+						console.log(  ${product.prodQuantity} );
+						
+						if (  quan>  prod ){
+							alert("${product.prodQuantity}개까지 구매하실 수 있습니다.");
+							 $( "#tranQuantity" ).val( prod );
+						}
+				    }
+				
+				});
+			});
 			
 	</script>
 </head>
@@ -150,6 +134,7 @@
 	        <div class="col-lg-4">
 	          <img src="../images/uploadFiles/${product.fileName}" width="400" height="400" 
 	    		      onerror="this.src='http://placehold.it/400x400'"/>
+	    		      파일 이름 확인 :  ${product.fileName}
 	        </div>
 	        
 	        <div class="col-lg-1">
@@ -199,14 +184,15 @@
 			
 			<hr/>
 			
-<!-- 			<div class="row"> -->
-<!-- 		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div> -->
-<!-- 				<div class="col-xs-2 col-md-2">  -->
-<!-- 						<input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="row">
+		  		<div class="col-xs-4 col-md-3"><strong>수량</strong></div>
+				<div class="col-xs-2 col-md-2"> 
+						<input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="1" readonly placeholder="수량">
+				</div>
+				<div><span id="test"></span></div>
+			</div>
 		
-<!-- 			<hr/> -->
+			<hr/>
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>
@@ -226,6 +212,9 @@
 		  		<c:if test="${ product.prodQuantity == 0}">
    						<a href="#" class="btn btn-danger" role="button">품절</a>
    				</c:if>
+   				<c:if test="${ param.menu eq 'manage'}">
+		  				<button type="button" class="btn btn-defalut">수정</button>
+		  		</c:if>
 	  			<button type="button" class="btn btn-defalut">목록</button>
 	  		</div>
 		</div>

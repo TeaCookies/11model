@@ -82,9 +82,17 @@
 			fncGetList(1);
 		}); 
 		
-		$( "a:contains('상세보기')" ).on("click" , function() {	
-			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
-			console.log ( $(  this  ).children().val() );
+// 		$( "a:contains('상세보기')" ).on("click" , function() {	
+// 			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
+// 			console.log ( $(  this  ).children().val() );
+// 		});
+		
+// 		$( "img" ).on("click" , function() {	
+// 			self.location ="/product/getProduct?prodNo="+  $(  this  ).parent().children().val()+"&menu=${param.menu}";
+// 		});
+		
+		$( ".thumbnail" ).on("click" , function() {	
+			self.location ="/product/getProduct?prodNo="+  $(  this  ).children().val()+"&menu=${param.menu}";
 		});
 		
 		$( "a:contains('바로구매')" ).on("click" , function() {	
@@ -92,10 +100,10 @@
 			console.log ( $(this).children().val() );
 		});
 		
-		$( "a:contains('수정')" ).on("click" , function() {	
-			self.location ="/product/updateProduct?prodNo="+$(this).children().val();
-			console.log ( $(this).children().val() );
-		});
+// 		$( "a:contains('수정')" ).on("click" , function() {	
+// 			self.location ="/product/updateProduct?prodNo="+$(this).children().val();
+// 			console.log ( $(this).children().val() );
+// 		});
 		
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 		$("h7").css("color" , "red");
@@ -186,34 +194,41 @@
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 						  <div class="col-sm-4 col-md-3">
-						    <div class="thumbnail" >
+						    <div class="thumbnail" style="height: 360px">
 <!-- 						    <div class="thumbnail" style="height: 450px; vertical-align: middle;"> -->
-						        <img  src="../images/uploadFiles/${product.fileName}" height="400px"  onerror="this.src='http://placehold.it/400x400'" >
-						   
+<input type="hidden" name="prodNo" value="${product.prodNo}"/>
+						        <img   height="700" src="../images/uploadFiles/${product.fileName}"  onerror="this.src='http://placehold.it/400x400'" >
+						  		 
 						      <div class="caption">
 						        <h3 align="center">
 						        		<c:if test="${ product.prodQuantity == 0}">
 						        		<button  class="btn btn-danger btn-xs">품절</button></c:if>
 						    		    ${product.prodName}
 						    	</h3>
-						        <c:if test="${ param.menu eq 'manage' }">
-						        	<p align="center">[남은 수량] ${product.prodQuantity }개</p>  
-						        </c:if> 
-						        <p align="center">${product.price}원</p>
 						        <p align="center">
-						      					<a href="#" class="btn btn-default" role="button" >상세보기
-						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/>
-						        				</a>
+						        <c:if test="${ param.menu eq 'manage' }">
+						        	[재고 :  ${product.prodQuantity }개]&nbsp; 
+						        </c:if> 
+						        ${product.price}원
+<%-- 						        <c:if test="${ param.menu eq 'manage' }"> --%>
+<!-- 		        						<a href="#" class="btn btn-default btn-xs" role="button">수정 -->
+<%-- 		        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 		        				</c:if> --%>
+						        </p>
+<!-- 						        <p align="center"> -->
+<!-- 						      					<a href="#" class="btn btn-default" role="button" >상세보기 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/> --%>
+<!-- 						        				</a> -->
 						        				
-						        				<c:if test="${ param.menu ne 'manage'  && product.prodQuantity != 0}">
-						        						<a href="#" class="btn btn-primary" role="button">바로구매
-						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>  
-						        				</c:if>
-						        				<c:if test="${ param.menu eq 'manage' }">
-						        						<a href="#" class="btn btn-primary" role="button">수정
-						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>  
-						        				</c:if>
-						        	</p>
+<%-- 						        				<c:if test="${ param.menu ne 'manage'  && product.prodQuantity != 0}"> --%>
+<!-- 						        						<a href="#" class="btn btn-primary" role="button">바로구매 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 						        				</c:if> --%>
+<%-- 						        				<c:if test="${ param.menu eq 'manage' }"> --%>
+<!-- 						        						<a href="#" class="btn btn-primary btn-xs" role="button">수정 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 						        				</c:if> --%>
+<!-- 						        	</p> -->
 						      </div>
 						    </div>
 						  </div>

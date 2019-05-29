@@ -39,7 +39,7 @@ public class PurchaseController {
 	private ProductService productService;
 	@Autowired
 	@Qualifier("userServiceImpl")
-	private UserService usertService;
+	private UserService userService;
 	//setter Method 구현 않음
 		
 	public PurchaseController(){
@@ -69,6 +69,7 @@ public class PurchaseController {
 		System.out.println("/purchase/addPurchase : GET");
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
 		purchase.setBuyer((User)session.getAttribute("user"));
+		purchase.setTranQuantity(Integer.parseInt(request.getParameter("tranQuantity")));
 		
 		model.addAttribute("purchase", purchase);
 		model.addAttribute("product", productService.getProduct(prodNo));
@@ -103,7 +104,7 @@ public class PurchaseController {
 			user.setMileage(user.getMileage()-purchase.getMileage()+newMileage);
 			
 		}
-		usertService.updateMileage(user);
+		userService.updateMileage(user);
 		purchase.setBuyer(user);
 //		purchase.setBuyer((User)session.getAttribute("user"));
 		purchase.setTranCode("1");
@@ -210,21 +211,30 @@ public class PurchaseController {
 	
 	@RequestMapping( value="cancelPurchase", method=RequestMethod.GET)
 	public String cancelPurchase( @ModelAttribute("purchase") Purchase purchase , 
-																@RequestParam("tranNo") int tranNo ,
+																@RequestParam("tranNo") int tranNo , HttpSession session,
 																Model model) throws Exception{
 		
 		System.out.println("/purchase/cancelPurchase : GET");
 	
+		//배송코드 바꾸기
 		Product product = productService.getProduct2(tranNo);
 		purchase = purchaseService.getPurchase(tranNo);
 		purchase.setTranCode("4");
 		purchaseService.updateTranCode(purchase);
 		
+		//새로 적립된 적립금 반환
+		User user=(User)session.getAttribute("user");
+		user.setMileage(user.getMileage()-product.getPrice()*purchase.getTranQuantity()*5/100);
+		
+		//사용한 적립금 돌려받기
+		user.setMileage(user.getMileage()+purchase.getMileage());
+		userService.updateMileage(user);
+		purchase.setBuyer(user);
+		
+		//상품 수량 반환
 		product.setProdQuantity(product.getProdQuantity()+purchase.getTranQuantity());
 		productService.updateProdQuantity(product);
-		
-		
-		//Business Logic
+
 		model.addAttribute("purchase", purchase);
 
 		return "forward:/purchase/listPurchase";

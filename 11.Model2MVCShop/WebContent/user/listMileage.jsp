@@ -55,6 +55,8 @@
 			fncGetList(1);
 		});
 		
+		
+		
 		$( "td:nth-child(4)" ).on("click" , function() {
 			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
 			console.log ( $(this).children().val() );
@@ -194,10 +196,10 @@
 				  </div>
 				  
 				  <button type="button" class="btn btn-default">검색</button>
-				  <br/>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
 				</form>
 	    	</div>
 	    	

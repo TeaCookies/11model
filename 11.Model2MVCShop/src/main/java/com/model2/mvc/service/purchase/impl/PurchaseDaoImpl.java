@@ -85,7 +85,7 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		sqlSession.update("PurchaseMapper.updateTranCode", purchase);
 	}
 	
-
+	
 	@Override
 	public int getTotalCount(String	buyerId) throws Exception {
 		Map<String , Object>  map = new HashMap<String, Object>();
