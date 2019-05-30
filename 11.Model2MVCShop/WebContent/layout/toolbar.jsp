@@ -28,6 +28,9 @@
 	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
 	         
 	         	<!-- Tool Bar 를 다양하게 사용하면.... -->
+	         	
+	         	<c:if test="${ !(empty sessionScope.user)   }">
+	            
 	             <ul class="nav navbar-nav">
 	             
 	              <!--  회원관리 DrowDown -->
@@ -43,8 +46,8 @@
 	                         	<li><a href="#">회원정보조회</a></li>
 	                         </c:if>
 	                         
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc...</a></li>
+<!-- 	                         <li class="divider"></li> -->
+<!-- 	                         <li><a href="#">etc...</a></li> -->
 	                     </ul>
 	                 </li>
 	                 
@@ -59,8 +62,8 @@
 		                         <li><a href="#">판매상품등록</a></li>
 		                         <li><a href="#">판매상품관리</a></li>
 		                         <li><a href="#">주문관리</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">etc..</a></li>
+<!-- 		                         <li class="divider"></li> -->
+<!-- 		                         <li><a href="#">etc..</a></li> -->
 		                     </ul>
 		                </li>
 	                 </c:if>
@@ -72,23 +75,30 @@
 	                         <span class="caret"></span>
 	                     </a>
 	                     <ul class="dropdown-menu">
-	                         <li><a href="#">상 품 검 색</a></li>
+	                         <li><a href="#">상품검색</a></li>
 	                         
 	                         <c:if test="${sessionScope.user.role == 'user'}">
 	                           <li><a href="#">구매이력조회</a></li>
 	                         </c:if>
 	                         
 	                         <li><a href="#">최근본상품</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc..</a></li>
+<!-- 	                         <li class="divider"></li> -->
+<!-- 	                         <li><a href="#">etc..</a></li> -->
 	                     </ul>
 	                 </li>
 	                 
-	                 <li><a href="#">etc...</a></li>
+<!-- 	                 <li><a href="#">etc...</a></li> -->
 	             </ul>
+	             </c:if>
 	             
 	             <ul class="nav navbar-nav navbar-right">
-	                <li><a href="#">로그아웃</a></li>
+		             	<c:if test="${ !(empty sessionScope.user)   }">
+		                		<li><a href="#">로그아웃</a></li>
+		                </c:if>
+		             	<c:if test="${ empty sessionScope.user   }">
+		                		<li><a href="#">회원가입</a></li>
+		                		<li><a href="#">로그인</a></li>
+		                </c:if>
 	            </ul>
 		</div>
 		<!-- dropdown hover END -->	       
@@ -107,6 +117,14 @@
 		 	$("a:contains('로그아웃')").on("click" , function() {
 				$(self.location).attr("href","/user/logout");
 				//self.location = "/user/logout"
+			}); 
+			
+		 	$("a:contains('로그인')").on("click" , function() {
+				$(self.location).attr("href","/user/login");
+			}); 
+			
+		 	$("a:contains('회원가입')").on("click" , function() {
+				$(self.location).attr("href","/user/addUser");
 			}); 
 		 });
 		
@@ -141,7 +159,7 @@
 		}); 
 	 	
 	 	
-	 	$( "a:contains('상 품 검 색')" ).on("click" , function() {
+	 	$( "a:contains('상품검색')" ).on("click" , function() {
 	 		self.location = "/product/listProduct?menu=search"
 		}); 
 	 	

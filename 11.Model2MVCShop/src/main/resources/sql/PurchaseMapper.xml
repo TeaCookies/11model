@@ -78,13 +78,11 @@
 	 <update	id="updatePurchase"	parameterType="purchase" >
 	   	UPDATE transaction
 	   	<set>
-	   		payment_option 		= #{paymentOption} ,
 			receiver_name		= #{receiverName:VARCHAR},
 			receiver_phone 		= #{receiverPhone:VARCHAR},
 			demailaddr	 		= #{divyAddr:VARCHAR} ,
 			dlvy_request 		= #{divyRequest:VARCHAR},
-			dlvy_date			= TO_DATE(#{divyDate:DATE},'YYYY-MM-DD'),
-			tran_status_code	= #{tranCode}
+			dlvy_date			= TO_DATE(#{divyDate:DATE},'YYYY-MM-DD')
 	   	</set>
 	   	WHERE tran_no = #{tranNo}
 	 </update>

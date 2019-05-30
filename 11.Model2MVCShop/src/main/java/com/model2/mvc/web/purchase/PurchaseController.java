@@ -128,6 +128,8 @@ public class PurchaseController {
 		
 		//Business Logic
 		Purchase purchase = purchaseService.getPurchase(tranNo);
+		purchase.setPurchaseProd(productService.getProduct2(tranNo));
+		
 		// Model °ú View ¿¬°á
 		model.addAttribute("purchase", purchase);
 		
@@ -163,6 +165,7 @@ public class PurchaseController {
 		
 		purchaseService.updatePurchase(purchase);
 		purchase = purchaseService.getPurchase(purchase.getTranNo());
+		purchase.setPurchaseProd(productService.getProduct2(purchase.getTranNo()));
 		
 		model.addAttribute("purchase", purchase);
 		
@@ -273,7 +276,7 @@ public class PurchaseController {
 	
 	
 	
-	@RequestMapping( value="listManage")
+	@RequestMapping( value="listManage", method=RequestMethod.GET)
 	public String listManage( @ModelAttribute("search") Search search, 
 			Model model ,
 			HttpSession session) throws Exception{
@@ -295,7 +298,11 @@ public class PurchaseController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		return "forward:/purchase/listManage.jsp";
+		if(session.getAttribute("user") != null ){
+			return "forward:/purchase/listManage.jsp";
+		}else {
+			return "forward:/index.jsp";
+		}
 	}
 	
 	

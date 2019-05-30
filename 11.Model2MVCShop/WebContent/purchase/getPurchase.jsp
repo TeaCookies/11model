@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 
@@ -37,12 +38,13 @@
 	
 	$(function() {
 		
-		$( "td.ct_btn01:contains('수정')" ).on("click" , function() {
+		$( "button:contains('수정')" ).on("click" , function() {
 			self.location = "/purchase/updatePurchase?tranNo=${purchase.tranNo}";
 		});
 		
 		
-		$( "td.ct_btn01:contains('확인')" ).on("click" , function() {
+		$( "button:contains('목록')" ).on("click" , function() {
+			console.log("목록 클릭");
 			self.location = "/purchase/listPurchase";
 		});
 	});
@@ -66,10 +68,24 @@
 		<div class="page-header">
 	       <h3 class=" text-info">구매상세조회</h3>
     </div>
+    
+    <div class="media">
+		  <div class="media-left">
+			    <a href="#">
+				       <img src="../images/uploadFiles/${purchase.purchaseProd.fileName}" width="64" height="64" 
+					    		      onerror="this.src='http://placehold.it/64x64'"/>
+			    </a>
+		  </div>
+		  <div class="media-body">
+			    <h4 class="media-heading">[${purchase.purchaseProd.prodNo}] ${purchase.purchaseProd.prodName }</h4>
+			   [결제금액] ${purchase.tranPrice }원 [수량] ${purchase.tranQuantity }개
+		  </div>
+	</div>
+	<br/><br/><br/>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>상품번호</strong></div>
-			<div class="col-xs-8 col-md-4">${purchase.purchaseProd.prodNo }</div>
+	  		<div class="col-xs-4 col-md-2"><strong>주문번호</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.tranNo }</div>
 		</div>
 		
 		<hr/>
@@ -84,15 +100,16 @@
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>구매방법</strong></div>
 			<div class="col-xs-8 col-md-4">
-					<c:choose>
-						<c:when test="${purchase.paymentOption eq '1'}">
-							현금구매
-						</c:when>
-						<c:otherwise>
-							신용구매
-						</c:otherwise>
-					</c:choose>
+						<c:if test="${purchase.paymentOption eq '0'}">현금결제</c:if>
+						 <c:if test="${purchase.paymentOption eq '1'}">카드결제</c:if>
 			</div>
+		</div>
+		
+		<hr/>
+		
+		<div class="row">
+	  		<div class="col-xs-4 col-md-2 "><strong>사용 적립금</strong></div>
+			<div class="col-xs-8 col-md-4">${purchase.mileage}원</div>
 		</div>
 		
 		<hr/>
@@ -141,7 +158,13 @@
 		
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
-	  			<button type="button" class="btn btn-primary">구매정보수정</button>
+	  			<c:if test="${purchase.tranCode eq '1' }">
+	  				<button type="button" class="btn btn-primary">수정</button>
+	  			</c:if>
+	  			<c:if test="${purchase.tranCode ne '1' }">
+					발송 후에는 수정하실 수 없습니다.
+	  			</c:if>
+	  			<button type="button" class="btn btn-default">목록</button>
 	  		</div>
 		</div>
 		

@@ -134,7 +134,7 @@
 	        <div class="col-lg-4">
 	          <img src="../images/uploadFiles/${product.fileName}" width="400" height="400" 
 	    		      onerror="this.src='http://placehold.it/400x400'"/>
-	    		      파일 이름 확인 :  ${product.fileName}
+<%-- 	    		      파일 이름 확인 :  ${product.fileName} --%>
 	        </div>
 	        
 	        <div class="col-lg-1">

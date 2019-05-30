@@ -76,44 +76,48 @@
 	$(function() {
 		//주문번호 클릭
 		$( "td:nth-child(2)" ).on("click" , function() {
-			var tranNo = $(this).text().trim();
+			var tranNo = $(this).text().trim() ;
+			console.log ( tranNo);
+			self.location ="/purchase/getPurchase?tranNo="+tranNo;
+			
+// 			var tranNo = $(this).text().trim();
 			//alert(tranNo);
 			
-			$.ajax( 
-				 		{
-							url : "/purchase/json/getPurchase/"+tranNo ,
-							method : "GET" ,
-							dataType : "json" ,
-							headers : {
-												"Accept" : "application/json",
-												"Content-Type" : "application/json"
-												},
-							success : function(JSONData , status) {
+// 			$.ajax( 
+// 				 		{
+// 							url : "/purchase/json/getPurchase/"+tranNo ,
+// 							method : "GET" ,
+// 							dataType : "json" ,
+// 							headers : {
+// 												"Accept" : "application/json",
+// 												"Content-Type" : "application/json"
+// 												},
+// 							success : function(JSONData , status) {
 				
-								//alert(status);
-								//alert("JSONData : \n"+JSONData);
-								if ($.trim(JSONData.paymentOption) == '0' ){JSONData.paymentOption="현금결제"}
-								if ($.trim(JSONData.paymentOption) == '1' ){JSONData.paymentOption="카드결제"}
+// 								//alert(status);
+// 								//alert("JSONData : \n"+JSONData);
+// 								if ($.trim(JSONData.paymentOption) == '0' ){JSONData.paymentOption="현금결제"}
+// 								if ($.trim(JSONData.paymentOption) == '1' ){JSONData.paymentOption="카드결제"}
 	
-								var displayValue = "<h6>"
-															+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
-															+"구매방법 : "+JSONData.paymentOption+"<br/>"
-															+"사용 적립금 : "+JSONData.mileage+"원<br/>"
-															+"구매자이름 : "+JSONData.receiverName+"<br/>"
-															+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
-															+"구매자주소 : "+JSONData.divyAddr+"<br/>"
-															+"구매요청사항 : "+JSONData.divyRequest+"<br/>"
-															+"배송희망일 : "+JSONData.divyDate+"<br/>"
-															+"주문일 : "+JSONData.orderDate+"<br/><br/>"
-// 															+"<button type=\"button\" class=\"btn btn-default btn-xs\">상세보기</button>"
-															+"</h6>";
+// 								var displayValue = "<h6>"
+// 															+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
+// 															+"구매방법 : "+JSONData.paymentOption+"<br/>"
+// 															+"사용 적립금 : "+JSONData.mileage+"원<br/>"
+// 															+"구매자이름 : "+JSONData.receiverName+"<br/>"
+// 															+"구매자연락처 : "+JSONData.receiverPhone+"<br/>"
+// 															+"구매자주소 : "+JSONData.divyAddr+"<br/>"
+// 															+"구매요청사항 : "+JSONData.divyRequest+"<br/>"
+// 															+"배송희망일 : "+JSONData.divyDate+"<br/>"
+// 															+"주문일 : "+JSONData.orderDate+"<br/><br/>"
+// // 															+"<button type=\"button\" class=\"btn btn-default btn-xs\">상세보기</button>"
+// 															+"</h6>";
 															
-								//Debug...									
-								//alert(displayValue);
-								$("h6").remove();
-								$( "#"+tranNo+"" ).html(displayValue);
-						}
-				});
+// 								//Debug...									
+// 								//alert(displayValue);
+// 								$("h6").remove();
+// 								$( "#"+tranNo+"" ).html(displayValue);
+// 						}
+// 				});
 		});		
 
 	

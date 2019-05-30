@@ -112,7 +112,8 @@
 	
 			
 	 });	
-	
+	 
+
 		
 </script>
 </head>
@@ -145,7 +146,10 @@
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건수
+		    		<c:if test="${ !(empty sessionScope.user)   }">
+		    		, 현재 ${resultPage.currentPage}  페이지
+		    		</c:if>
 		    	</p>
 		    </div>
 
@@ -171,11 +175,13 @@
 				  <input type="hidden" id="currentPage" name="currentPage" value=""/><br/>
 				  <input type="hidden" id="searchCondition" name="searchCondition" value=""/><br/>
 				  <input type="hidden" id="soldOut" name="soldOut" value="1"/><br/>
-				  <span> [품절상품제외] </span>
-				  <span> [낮은 가격 순] </span>
-				  <span> [높은 가격 순] </span>
-				  <span> [등록 순] </span>
-				  <span> [신상품 순] </span>
+				 <c:if test="${ !(empty sessionScope.user)   }">
+						  <span> [품절상품제외] </span>
+						  <span> [낮은 가격 순] </span>
+						  <span> [높은 가격 순] </span>
+						  <span> [등록 순] </span>
+						  <span> [신상품 순] </span>
+				  </c:if>
 				</form>
 	    	</div>
 	    	
@@ -239,7 +245,9 @@
 
  	
  	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
+<%--  	<c:if test="${ !(empty sessionScope.user)   }"> --%>
+			<jsp:include page="../common/pageNavigator_new.jsp"/>
+<%-- 	</c:if> --%>
 	<!-- PageNavigation End... -->
 	
 </body>

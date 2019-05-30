@@ -51,7 +51,30 @@
 					return;
 				}
 				
-				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+				
+					/////////////////////////////////////////////////////////////////////////////////////////// 
+					var userId = $('#userId').val().trim();
+					var password = $('#password').val().trim();
+					$.ajax( 
+							{
+								url : "/user/json/getUser/"+userId ,
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+														"Accept" : "application/json",
+														"Content-Type" : "application/json"											
+																																									},
+								success : function(JSONData , status) {
+											//	alert(JSONData.result);
+												if(  $.trim(JSONData.password) == password ){		
+													$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
+												}else{
+													 $( '#pwdTest').text( '비밀번호를 다시 확인해주세요.'  );
+												}
+																																									}
+							}  )
+				
+// 				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 			});
 		});	
 		
@@ -63,6 +86,8 @@
 				self.location = "/user/addUser"
 			});
 		});
+		
+		
 		
 	</script>		
 	
@@ -107,6 +132,7 @@
 					    <label for="password" class="col-sm-4 control-label">패 스 워 드</label>
 					    <div class="col-sm-6">
 					      <input type="password" class="form-control" name="password" id="password" placeholder="패스워드" >
+					        <span id="pwdTest" > </span>
 					    </div>
 					  </div>
 					  

@@ -38,9 +38,13 @@
 		//============= 회원정보수정 Event  처리 =============	
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $( "button" ).on("click" , function() {
+			 $( "button:contains('수정')" ).on("click" , function() {
 					self.location = "/user/updateUser?userId=${user.userId}"
-				});
+			});
+			
+			 $( "button:contains('목록')" ).on("click" , function() {
+					self.location = "/user/listUser"
+			});
 		});
 		
 	</script>
@@ -113,6 +117,9 @@
 		<div class="row">
 	  		<div class="col-md-12 text-center ">
 	  			<button type="button" class="btn btn-primary">회원정보수정</button>
+	  			<c:if test="${user.role eq 'admin' }">
+	  				<button type="button" class="btn btn-default">목록</button>
+	  			</c:if>
 	  		</div>
 		</div>
 		

@@ -181,6 +181,16 @@
 				 }
 			
 			 }); //비번 키업 
+			 
+// 			 $( "input[name=phone2], input[name=phone2]" ).keyup(function( ) {
+// 				 if( 		$("input[name=phone2]").val().length() 	> '4' 	){
+// 							alert("그만");
+// 				 }
+// 			 else {
+// 							 $( '#pwdTest').text(   ' '   );
+// 				 }
+			
+// 			 }); 
 		});	
 
 	</script>		

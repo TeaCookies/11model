@@ -88,6 +88,7 @@ public class Purchase {
 		this.orderDate = orderDate;
 	}
 	public String getPaymentOption() {
+		paymentOption=paymentOption.trim();
 		return paymentOption;
 	}
 	public void setPaymentOption(String paymentOption) {
