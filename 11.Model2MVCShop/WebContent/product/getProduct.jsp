@@ -205,8 +205,11 @@
 		<hr/>
 				  			<% System.out.println( "테스트@@@@@@@@@@@"+ request.getParameter("menu")); %>
 		<div class="row">
+		
 	  		<div class="col-md-12 text-center ">
-		  		<c:if test="${ param.menu ne 'manage' && product.prodQuantity != 0}">
+		  		<c:if test="${ empty sessionScope.user  }">비회원은 구매하실 수 없습니다.<br/>
+				</c:if>
+		  		<c:if test="${ param.menu ne 'manage' && product.prodQuantity != 0 &&  !(empty sessionScope.user)   }">
 		  				<button type="button" class="btn btn-primary">구매</button>
 		  		</c:if>
 		  		<c:if test="${ product.prodQuantity == 0}">

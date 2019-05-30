@@ -51,13 +51,14 @@ public class UserController {
 	}
 	
 	@RequestMapping( value="addUser", method=RequestMethod.POST )
-	public String addUser( @ModelAttribute("user") User user ) throws Exception {
+	public String addUser( @ModelAttribute("user") User user, Model model ) throws Exception {
 
 		System.out.println("/user/addUser : POST");
 		//Business Logic
 		userService.addUser(user);
+		model.addAttribute("user", user);
 		
-		return "redirect:/user/loginView.jsp";
+		return "redirect:/welcome.jsp";
 	}
 	
 

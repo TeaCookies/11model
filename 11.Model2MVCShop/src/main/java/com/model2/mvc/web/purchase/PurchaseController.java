@@ -66,7 +66,7 @@ public class PurchaseController {
 												Model model,  HttpServletRequest request,
 												HttpSession session) throws Exception {
 
-		System.out.println("/purchase/addPurchase : GET");
+		System.out.println("/purchase/addPurchase : GET"+request.getParameter("tranQuantity"));
 		purchase.setPurchaseProd(productService.getProduct(prodNo));
 		purchase.setBuyer((User)session.getAttribute("user"));
 		purchase.setTranQuantity(Integer.parseInt(request.getParameter("tranQuantity")));

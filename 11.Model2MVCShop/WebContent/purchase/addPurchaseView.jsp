@@ -214,7 +214,7 @@
 		   <div class="form-group">
 		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"> 수량</label>
 		    <div class="col-sm-1">
-		      <input type="number" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}개" readonly placeholder="수량">
+		      <input type="text" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}개" readonly >
 		    </div>
 		  </div>
 
