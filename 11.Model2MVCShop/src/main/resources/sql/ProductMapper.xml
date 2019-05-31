@@ -85,21 +85,28 @@
 											 		AND prodquantity != 0
 													</if>
 												</where>
-												<if test="searchCondition == null">
-													ORDER BY prod_no DESC
-												</if>
-												<if test="searchCondition == 0 ">
-													ORDER BY price 
-												</if>
-												<if test="searchCondition == 1 ">
-													ORDER BY price DESC
-												</if>
-												<if test="searchCondition == 2 ">
-													ORDER BY prod_no
-												</if>
-												<if test="searchCondition == 3">
-													ORDER BY prod_no DESC
-												</if>
+									
+												
+												<choose>
+													<when test="searchCondition == 1 ">
+														ORDER BY price 
+													</when>
+													<when test="searchCondition == 2 ">
+														ORDER BY price DESC
+													</when>
+													<when test="searchCondition == 3 ">
+														ORDER BY prod_no
+													</when>
+													<when test="searchCondition == 4">
+														ORDER BY prod_no DESC
+													</when>
+													<otherwise>
+														ORDER BY prod_no DESC
+													</otherwise>
+													
+												
+												</choose>
+												
 												) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 

@@ -248,9 +248,7 @@ public class PurchaseController {
 	
 	//@RequestMapping("/listPurchase.do")
 	@RequestMapping( value="listPurchase")
-	public String listPurchase( @ModelAttribute("search") Search search, 
-															Model model ,
-															HttpSession session) throws Exception{
+	public String listPurchase( @ModelAttribute("search") Search search, Model model , HttpSession session) throws Exception{
 		
 		System.out.println("/purchase/listPurchase : GET / POST");
 		
@@ -271,15 +269,14 @@ public class PurchaseController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
+		
 		return "forward:/purchase/listPurchase.jsp";
 	}
 	
 	
 	
 	@RequestMapping( value="listManage", method=RequestMethod.GET)
-	public String listManage( @ModelAttribute("search") Search search, 
-			Model model ,
-			HttpSession session) throws Exception{
+	public String listManage( @ModelAttribute("search") Search search, Model model ) throws Exception{
 		
 		System.out.println("/purchase/listPurchase : GET / POST");
 		
@@ -298,11 +295,9 @@ public class PurchaseController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
-		if(session.getAttribute("user") != null ){
-			return "forward:/purchase/listManage.jsp";
-		}else {
-			return "forward:/index.jsp";
-		}
+
+		return "forward:/purchase/listManage.jsp";
+
 	}
 	
 	

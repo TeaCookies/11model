@@ -123,9 +123,9 @@
  			if (    $( 'input[type=checkbox]').prop("checked")   ){
 					console.log ("체크 확인" );
 					console.log (  $( 'input[type=checkbox]').val()  );
-					$( '#tranPrice').val( price-mileage);
+					$( '#tranPrice').val(  parseInt(price)- parseInt(mileage)  );
 			}else{
-				$( '#tranPrice').val( ${purchase.purchaseProd.price } *  quantity  );
+				$( '#tranPrice').val( ${purchase.purchaseProd.price } *  parseInt(quantity)  );
 			}
  		});
 				
@@ -207,14 +207,14 @@
 		  <div class="form-group">
 		    <label for="tranPrice" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="tranPrice" name="tranPrice" placeholder="가격" value="${purchase.purchaseProd.price*purchase.tranQuantity}원" readonly>
+		      <input type="text" class="form-control" id="tranPrice" name="tranPrice" placeholder="가격" value="${purchase.purchaseProd.price*purchase.tranQuantity}" readonly>
 		    </div>
 		  </div>
 		  		  		  
 		   <div class="form-group">
 		    <label for="tranQuantity" class="col-sm-offset-1 col-sm-3 control-label"> 수량</label>
 		    <div class="col-sm-1">
-		      <input type="text" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}개" readonly >
+		      <input type="text" class="form-control" id="tranQuantity" name="tranQuantity" value="${purchase.tranQuantity}" readonly >
 		    </div>
 		  </div>
 

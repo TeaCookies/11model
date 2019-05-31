@@ -22,6 +22,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 	
 	
+	
 	<!-- Bootstrap Dropdown Hover CSS -->
    <link href="/css/animate.min.css" rel="stylesheet">
    <link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
@@ -36,9 +37,24 @@
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	  body {
-            padding-top : 50px;
-        }
+	  body { 
+              padding-top : 50px; 
+       } 
+       
+       .thumbnail{  
+       			 width: 100%; height: 50px; overflow: hidden;  
+        }  
+       
+       img { 
+/*       			 max-width: 100%;  */
+      			 max-height: 250px; 
+      			 min-height: 250px; 
+      			 min-width: 245px; 
+       }
+
+/* 출처: https://webdir.tistory.com/487 [WEBDIR] */
+
+
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -51,44 +67,67 @@
 	
 	
 	 $(function() {
-		$( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+		 $( "button.btn.btn-default" ).on("click" , function() {
 			fncGetList(1);
 		});
 		
+		$("span:contains('품절')").on("click" , function() {
+			$(  '#soldOut'  ).val(  '0'  );
+			fncGetList(1);
+		}); 
 		
+		$("span:contains('낮은')").on("click" , function() {
+			$(  '#searchCondition'  ).val(  '1'  );
+			fncGetList(1);
+		}); 
 		
-		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
-				console.log ( $(this).children().val() );
-				console.log (":::"+ $( ".ct_list_pop td:nth-child(9)").html() );
+		$("span:contains('높은')").on("click" , function() {
+			$(  '#searchCondition'  ).val(  '2'  );
+			fncGetList(1);
+		}); 
+		
+		$("span:contains('등록')").on("click" , function() {
+			$(  '#searchCondition'  ).val(  '3'  );
+			fncGetList(1);
+		}); 
+		
+		$("span:contains('신상품')").on("click" , function() {
+			$(  '#searchCondition'  ).val(  '4'  );
+			fncGetList(1);
+		}); 
+		
+// 		$( "a:contains('상세보기')" ).on("click" , function() {	
+// 			self.location ="/product/getProduct?prodNo="+ $(this).children().val()+"&menu=${param.menu}";
+// 			console.log ( $(  this  ).children().val() );
+// 		});
+		
+// 		$( "img" ).on("click" , function() {	
+// 			self.location ="/product/getProduct?prodNo="+  $(  this  ).parent().children().val()+"&menu=${param.menu}";
+// 		});
+		
+		$( ".thumbnail" ).on("click" , function() {	
+			self.location ="/product/getProduct?prodNo="+  $(  this  ).children().val()+"&menu=${param.menu}";
 		});
+		
+		$( "a:contains('바로구매')" ).on("click" , function() {	
+			self.location = "/purchase/addPurchase?prodNo="+$(this).children().val();
+			console.log ( $(this).children().val() );
+		});
+		
+// 		$( "a:contains('수정')" ).on("click" , function() {	
+// 			self.location ="/product/updateProduct?prodNo="+$(this).children().val();
+// 			console.log ( $(this).children().val() );
+// 		});
 		
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 		$("h7").css("color" , "red");
 			
 		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 	
-		$( "td:contains('배송하기')" ).on("click" , function() {
-		//	self.location ="/purchase/updateTranCode?prodNo="+$(this).parent().children("td:nth-child(3)").children().val()+"&tranCode="+$(this).parent().children("td:nth-child(9)").children().val();
-			self.location ="/purchase/updateTranCode?tranNo="+$(this).parent().children("td:nth-child(3)").children("input:nth-child(2)").val()+"&tranCode="+$(this).parent().children("td:nth-child(9)").children().val();
-			console.log ( "확인1 :: "+$(this).parent().children("td:nth-child(3)").children().val() );
-			console.log ( "확인2 :: "+$(this).parent().children("td:nth-child(3)").children("input:nth-child(2)").val() );
-			console.log ( "확인3 :: "+$(this).parent().children("td:nth-child(9)").children().val() );
-		
-		});
-		
-		$( "#price:contains('가격')" ).on("click" , function() {
-			self.location ="/product/listProduct?menu=${param.menu}";
-			console.log ( "/product/listProduct?menu=${param.menu}");
-		});
-	//	$( "td:contains('수정')" ).on("click" , function() {
-	//		self.location ="/product/getProduct?prodNo="+$( ".ct_list_pop td:nth-child(3)" ).children().val()+"&menu=${param.menu}";
-	//		console.log ( "/product/listProduct?menu=${param.menu}");
-	//	});
-				
 			
 	 });	
-	
+	 
+
 		
 </script>
 </head>
@@ -115,17 +154,28 @@
 	       </h3>
 	    </div>
 	    
+	    
 	    <!-- table 위쪽 검색 Start /////////////////////////////////////-->
 	    <div class="row">
 	    
 		    <div class="col-md-6 text-left">
 		    	<p class="text-primary">
-		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    		전체  ${resultPage.totalCount } 건수
+		    		<c:if test="${ !(empty sessionScope.user)   }">
+		    		, 현재 ${resultPage.currentPage}  페이지
+		    		</c:if>
 		    	</p>
 		    </div>
-		    
+
 		    <div class="col-md-6 text-right">
 			    <form class="form-inline" name="detailForm">
+			    
+<!-- 			      <div class="form-group"> -->
+<!-- 				    <select class="form-control" name="searchCondition" > -->
+<%-- 						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>낮은 가격 순</option> --%>
+<%-- 						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>높은 가격 순</option> --%>
+<!-- 					</select> -->
+<!-- 				  </div> -->
 			    
 				  <div class="form-group">
 				    <label class="sr-only" for="searchKeyword">검색어</label>
@@ -136,68 +186,82 @@
 				  <button type="button" class="btn btn-default">검색</button>
 				  
 				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
-				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
-				  
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/><br/>
+				  <input type="hidden" id="searchCondition" name="searchCondition" value=""/><br/>
+				  <input type="hidden" id="soldOut" name="soldOut" value="1"/><br/>
+				 <c:if test="${ !(empty sessionScope.user)   }">
+						  <span> [품절상품제외] </span>
+						  <span> [낮은 가격 순] </span>
+						  <span> [높은 가격 순] </span>
+						  <span> [등록 순] </span>
+						  <span> [신상품 순] </span>
+				  </c:if>
 				</form>
 	    	</div>
 	    	
 		</div>
+		
+
 		<!-- table 위쪽 검색 Start /////////////////////////////////////-->
+		
+
 		
 		
       <!--  table Start /////////////////////////////////////-->
-      <table class="table table-hover table-striped" >
-      
-        <thead>
-          <tr>
-            <th align="left">No</th>
-            <th align="left" >상품명</th>
-            <c:if test="${ param.menu eq 'manage' }">
-		            <th align="left" >남은 수량</th>
-		            <th align="left" >주문번호</th>
-            </c:if>
-            <th align="left">가격</th>
-            <th align="left">등록일</th>
-            <th align="left">현재상태</th>
-          </tr>
-        </thead>
-       
-		<tbody>
-		
+
+		<br/>
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
-			<tr>
-			  <td align="left">${ i }</td>
-			  <td align="left"  title="Click : 상품정보 확인">${product.prodName} 
-<!--					<input type="hidden" value="${product.prodNo}"/>
-					<input type="hidden" value="${ product.prodTranNo }"/>		-->
-					<% System.out.println("확인            2        :  "+ request.getAttribute("list")); %>
-			  </td>
-			   <c:if test="${ param.menu eq 'manage' }">
-				  <td align="left">${product.prodQuantity}개</td>
-				  <td align="left"> ${ product.prodTranNo }</td>
-			  </c:if>
-			  <td align="left">${product.price}원</td>
-			  <td align="left">${product.manuDate}</td>
-			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${product.prodName} "></i>
-			  	<input type="hidden" value="${product.prodName} ">
-			  </td>
-			</tr>
+						  <div class="col-sm-4 col-md-3">
+						    <div class="thumbnail" style="height: 360px">
+<!-- 						    <div class="thumbnail" style="height: 450px; vertical-align: middle;"> -->
+								<input type="hidden" name="prodNo" value="${product.prodNo}"/>
+						        <img   height="700" src="../images/uploadFiles/${product.fileName}"  height="100" onerror="this.src='http://placehold.it/400x400'" >
+
+						      <div class="caption">
+						        <h3 align="center">
+						        		<c:if test="${ product.prodQuantity == 0}">
+						        		<button  class="btn btn-danger btn-xs">품절</button></c:if>
+						    		    ${product.prodName}
+						    	</h3>
+						        <p align="center">
+						        <c:if test="${ param.menu eq 'manage' }">
+						        	[재고 :  ${product.prodQuantity }개]&nbsp; 
+						        </c:if> 
+						        ${product.price}원
+<%-- 						        <c:if test="${ param.menu eq 'manage' }"> --%>
+<!-- 		        						<a href="#" class="btn btn-default btn-xs" role="button">수정 -->
+<%-- 		        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 		        				</c:if> --%>
+						        </p>
+<!-- 						        <p align="center"> -->
+<!-- 						      					<a href="#" class="btn btn-default" role="button" >상세보기 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/> --%>
+<!-- 						        				</a> -->
+						        				
+<%-- 						        				<c:if test="${ param.menu ne 'manage'  && product.prodQuantity != 0}"> --%>
+<!-- 						        						<a href="#" class="btn btn-primary" role="button">바로구매 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 						        				</c:if> --%>
+<%-- 						        				<c:if test="${ param.menu eq 'manage' }"> --%>
+<!-- 						        						<a href="#" class="btn btn-primary btn-xs" role="button">수정 -->
+<%-- 						        						<input type="hidden" name="prodNo" value="${product.prodNo}"/></a>   --%>
+<%-- 						        				</c:if> --%>
+<!-- 						        	</p> -->
+						      </div>
+						    </div>
+						  </div>
           </c:forEach>
-        
-        </tbody>
-      
-      </table>
-	  <!--  table End /////////////////////////////////////-->
 	  
  	</div>
  	<!--  화면구성 div End /////////////////////////////////////-->
- 	
+
  	
  	<!-- PageNavigation Start... -->
-	<jsp:include page="../common/pageNavigator_new.jsp"/>
+<%--  	<c:if test="${ !(empty sessionScope.user)   }"> --%>
+			<jsp:include page="../common/pageNavigator_new.jsp"/>
+<%-- 	</c:if> --%>
 	<!-- PageNavigation End... -->
 	
 </body>
