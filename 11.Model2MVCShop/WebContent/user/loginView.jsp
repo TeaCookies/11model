@@ -63,16 +63,19 @@
 								headers : {
 														"Accept" : "application/json",
 														"Content-Type" : "application/json"											
-																																									},
+												},
 								success : function(JSONData , status) {
-											//	alert(JSONData.result);
+												//alert(JSONData.result);
 												if(  $.trim(JSONData.password) == password ){		
 													$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
 												}else{
-													 $( '#pwdTest').text( '비밀번호를 다시 확인해주세요.'  );
+													 $( '#error').text( '아이디 또는 패스워드를 다시 확인하세요.'  );
 												}
-												
-																																									}
+												},
+								error : function(error){
+									 $( '#error').text( '아이디 또는 패스워드를 다시 확인하세요.'  );
+											}
+																																									
 							}  )
 				
 // 				$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
@@ -133,7 +136,7 @@
 					    <label for="password" class="col-sm-4 control-label">패 스 워 드</label>
 					    <div class="col-sm-6">
 					      <input type="password" class="form-control" name="password" id="password" placeholder="패스워드" >
-					        <span id="pwdTest" > </span>
+					        <span id="error" > </span>
 					    </div>
 					  </div>
 					  

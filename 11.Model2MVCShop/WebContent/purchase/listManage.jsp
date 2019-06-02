@@ -95,6 +95,11 @@
 									//alert("JSONData : \n"+JSONData);
 									if ($.trim(JSONData.paymentOption) == '0' ){JSONData.paymentOption="현금결제"}
 									if ($.trim(JSONData.paymentOption) == '1' ){JSONData.paymentOption="카드결제"}
+									
+									if (JSONData.receiverPhone == null ){JSONData.receiverPhone=" "}
+									if (JSONData.divyAddr == null ){JSONData.divyAddr=" "}
+									if (JSONData.divyRequest == null ){JSONData.divyRequest=" "}
+									if (JSONData.divyDate == null ){JSONData.divyDate=" "}
 		
 									var displayValue = "<h6>"
 																+"상품번호 : "+JSONData.purchaseProd.prodNo+"<br/>"
@@ -134,6 +139,8 @@
 								"Content-Type" : "application/json"
 							},
 							success : function(JSONData , status) {
+								
+								if (JSONData.email == null ){JSONData.email=" "}
 
 								var displayValue = "<h6>"
 															+"아이디 : "+JSONData.userId+"<br/>"

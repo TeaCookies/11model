@@ -163,12 +163,12 @@
 			
 			<hr/>
 			
-			<div class="row">
-		  		<div class="col-xs-4 col-md-3"><strong>제조일자</strong></div>
-				<div class="col-xs-8 col-md-4">${ product.manuDate }</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 		  		<div class="col-xs-4 col-md-3"><strong>제조일자</strong></div> -->
+<%-- 				<div class="col-xs-8 col-md-4">${ product.manuDate }</div> --%>
+<!-- 			</div> -->
 			
-			<hr/>
+<!-- 			<hr/> -->
 			
 			<div class="row">
 		  		<div class="col-xs-4 col-md-3"><strong>가격</strong></div>
@@ -192,12 +192,12 @@
 				<div><span id="test"></span></div>
 			</div>
 		
-			<hr/>
+<!-- 			<hr/> -->
 			
-			<div class="row">
-		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div>
-				<div class="col-xs-8 col-md-4">${ product.regDate }</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 		  		<div class="col-xs-4 col-md-3 "><strong>등록일자</strong></div> -->
+<%-- 				<div class="col-xs-8 col-md-4">${ product.regDate }</div> --%>
+<!-- 			</div> -->
           
         </div>
       </div>

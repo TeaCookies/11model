@@ -108,24 +108,17 @@ public class ProductController {
 		model.addAttribute("product", product);	
 		System.out.println("파일이름 확인 : "+product.getFileName());
 		
-//		if ( menu.equals("manage") ) {
-//			return "forward:/product/updateProduct";
-//			
-//		} else {
-		String name = "";
-		String abc = "1";
-		name = name + abc + ",";
 		
 			if ( cookie != null ) {
 				if ( !(   cookie.getValue().contains(  Integer.toString(prodNo)   )   ) ) {
-					System.out.println("쿠키확인 @@@@@@@@@@ "+cookie.getValue());
-					cookie.setValue(cookie.getValue()+","+Integer.toString(prodNo));
-					System.out.println("쿠키확인2 @@@@@@@@@@ "+cookie.getValue());
+					cookie.setValue(   cookie.getValue()  +  Integer.toString(prodNo)  +  ","  );
 					cookie.setPath("/");
-					response.addCookie(cookie);
+					response.addCookie(  cookie  );
 				}
 			}else {
-				response.addCookie(new Cookie("history", Integer.toString(prodNo)));
+				cookie = new Cookie(  "history"  ,   Integer.toString(prodNo)+","   );
+				cookie.setPath("/");
+				response.addCookie(  cookie  );
 			}
 	
 		return "forward:/product/getProduct.jsp";

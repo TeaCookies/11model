@@ -72,14 +72,14 @@
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2"><strong>가격</strong></div>
-			<div class="col-xs-8 col-md-4">${purchase.tranPrice}</div>
+			<div class="col-xs-8 col-md-4">${purchase.tranPrice}원</div>
 		</div>
 		
 		<hr/>
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>구매 수량</strong></div>
-			<div class="col-xs-8 col-md-4">${purchase.tranQuantity}</div>
+			<div class="col-xs-8 col-md-4">${purchase.tranQuantity}개</div>
 		</div>
 		
 		<hr/>
