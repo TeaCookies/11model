@@ -178,6 +178,12 @@ figure.snip1384.hover i {
 			$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu=${param.menu}").submit();
 	}
 	
+	function fncGetList2(currentPage, searchCondition) {
+			$("#currentPage").val(currentPage)
+			$("#searchCondition").val(searchCondition)
+			$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu=${param.menu}").submit();
+	}
+	
 	
 	 $(function() {
 		 $( "button.btn.btn-default" ).on("click" , function() {
@@ -191,22 +197,23 @@ figure.snip1384.hover i {
 		
 		$("span:contains('낮은')").on("click" , function() {
 			$(  '#searchCondition'  ).val(  '1'  );
-			fncGetList(1);
+			fncGetList2(1,'1');
 		}); 
 		
 		$("span:contains('높은')").on("click" , function() {
 			$(  '#searchCondition'  ).val(  '2'  );
-			fncGetList(1);
+			fncGetList2(1,'2');
+// 			fncGetList(1);
 		}); 
 		
 		$("span:contains('등록')").on("click" , function() {
 			$(  '#searchCondition'  ).val(  '3'  );
-			fncGetList(1);
+			fncGetList2(1,'3');
 		}); 
 		
 		$("span:contains('신상품')").on("click" , function() {
 			$(  '#searchCondition'  ).val(  '4'  );
-			fncGetList(1);
+			fncGetList2(1,'4');
 		}); 
 		
 // 		$( "a:contains('상세보기')" ).on("click" , function() {	
@@ -341,9 +348,13 @@ figure.snip1384.hover i {
 			<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 				  <img src="../images/uploadFiles/${product.fileName}" onerror="this.src='http://placehold.it/400x400'"/>
 				  <figcaption>
-					    <h3>${product.prodName}</h3>
+					    <h3>${product.prodName}<c:if test="${ product.prodQuantity == 0}">
+						        		<button  class="btn btn-danger btn-xs">품절</button></c:if></h3>
 					    <p> ${product.price}원</p><i class="ion-ios-arrow-right"></i>
 				  </figcaption>
+				  <c:if test="${ param.menu eq 'manage' }">
+				  [재고] ${product.prodQuantity}개
+				  </c:if>
 			</figure>
 			</div>			
 

@@ -275,7 +275,7 @@ public class PurchaseController {
 	
 	
 	
-	@RequestMapping( value="listManage", method=RequestMethod.GET)
+	@RequestMapping( value="listManage")
 	public String listManage( @ModelAttribute("search") Search search, Model model ) throws Exception{
 		
 		System.out.println("/purchase/listPurchase : GET / POST");

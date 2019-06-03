@@ -174,7 +174,8 @@ public class ProductController {
 	//@RequestMapping("/listProduct.do")
 	@RequestMapping( value="listProduct" )
 	public String listProduct( @ModelAttribute("search") Search search,
-														@RequestParam("menu") String menu  ,Model model ) throws Exception{
+														@RequestParam("menu") String menu  ,
+														Model model ) throws Exception{
 		
 		System.out.println("/product/listProduct : GET / POST"+menu);
 		

@@ -10,6 +10,8 @@
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
 		  <ul class="pagination" >
 		    
+		    
+		    
 		    <!--  <<== 좌측 nav -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		 		<li class="disabled">
@@ -17,10 +19,12 @@
 			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 				<li>
 			</c:if>
-		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">
+				    		<a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">    
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
+		    
+		    
 		    
 		    <!--  중앙  -->
 			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
@@ -28,13 +32,28 @@
 				<c:if test="${ resultPage.currentPage == i }">
 					<!--  현재 page 가르킬경우 : active -->
 				    <li class="active">
-				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
+				    
+				 	   	<c:if test="${ search.searchCondition eq null }">
+				    			<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
+				    	</c:if>
+						<c:if test="${ search.searchCondition ne null }">
+				      			<a href="javascript:fncGetList2('${  i }',  '${ search.searchCondition }');">${ i }<span class="sr-only">(current)</span></a>
+				     	</c:if>
+				    	
 				    </li>
 				</c:if>	
 				
+				
 				<c:if test="${ resultPage.currentPage != i}">	
 					<li>
-						<a href="javascript:fncGetList('${ i }');">${ i }</a>
+					
+					 <c:if test="${ search.searchCondition eq null }">
+							<a href="javascript:fncGetList('${ i }');">${ i }</a>
+					</c:if>
+					<c:if test="${ search.searchCondition ne null }">
+			      			<a href="javascript:fncGetList2('${  i }',  '${ search.searchCondition }');">${ i }</a>
+			      	</c:if>
+							
 					</li>
 				</c:if>
 			</c:forEach>
@@ -46,7 +65,10 @@
 			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 				<li>
 			</c:if>
+			
 		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next">
+		      
+		     
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>

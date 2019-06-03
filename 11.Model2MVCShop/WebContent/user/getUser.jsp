@@ -82,7 +82,10 @@
 		
 		<div class="row">
 	  		<div class="col-xs-4 col-md-2 "><strong>적립금</strong></div>
-			<div class="col-xs-8 col-md-4">${user.mileage}원</div>
+			<div class="col-xs-8 col-md-4">${user.mileage}원
+			
+<!-- 			 <button type="button" class="btn btn-default btn-xs">상세보기</button> -->
+			</div>
 		</div>
 		
 		<hr/>

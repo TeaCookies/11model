@@ -28,7 +28,9 @@ CREATE TABLE users (
 
 CREATE TABLE mileage ( 
 	user_id 		 	VARCHAR2(20)	NOT NULL REFERENCES users(user_id),
-	mileage	 		NUMBER(6,0)
+	mileage	 		NUMBER(6,0) NOT NULL ,
+	reg_date 	 	DATE NOT NULL ,
+	content	 		VARCHAR2(30) NOT NULL 
 );
 
 
